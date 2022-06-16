@@ -10,7 +10,6 @@ import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { Routes } from 'react-router-dom';
 
 export class MainView extends React.Component {
     constructor(){
@@ -85,7 +84,6 @@ export class MainView extends React.Component {
           <Router>
              <Navbar user={user} />
               <Row className="main-view justify-content-md-center">
-                <Routes>
                 <Route exact path="/" render={() => {
                   if (!user) return <Col>
                     <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
@@ -153,9 +151,7 @@ export class MainView extends React.Component {
                       return <Col>
                       <UserUpdate user={user} onBackClick={() => history.goBack()} />
                     </Col>
-                  }} />
-                </Routes>
-
+                  }} />              
               </Row>
             </Router>
         );
