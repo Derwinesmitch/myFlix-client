@@ -48,7 +48,7 @@ const handleSubmit = (e) => {
   const isReq = validate();
   if(isReq) {
     /* Send request to the server for authentication */
-    axios.post('YOUR_API_URL/users', {
+    axios.post('https://movieappcf.herokuapp.com/users/', {
         Username: username,
         Password: password,
         Email: email,
@@ -103,7 +103,7 @@ return (
               Submit
         </Button>
         <p></p>
-        <p>Alread registered <Link to={'/'}>sign in</Link> here</p>
+        <p>Already registered <Link to={'/'}>sign in</Link> here</p>
       </Form>
     </Col>
   </Row>
