@@ -49774,7 +49774,7 @@ function Navbar({ user  }) {
                     children: "myFlixApp"
                 }, void 0, false, {
                     fileName: "src/components/navbar/navbar.jsx",
-                    lineNumber: 25,
+                    lineNumber: 26,
                     columnNumber: 13
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Navbar).Collapse, {
@@ -49786,18 +49786,18 @@ function Navbar({ user  }) {
                                 href: `/users/${user}`
                             }, void 0, false, {
                                 fileName: "src/components/navbar/navbar.jsx",
-                                lineNumber: 29,
+                                lineNumber: 30,
                                 columnNumber: 29
                             }, this),
                             isAuth() && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
                                 variant: "link",
                                 onClick: ()=>{
-                                    this.onLoggedOut();
+                                    onLoggedOut();
                                 },
                                 children: "Logout"
                             }, void 0, false, {
                                 fileName: "src/components/navbar/navbar.jsx",
-                                lineNumber: 32,
+                                lineNumber: 33,
                                 columnNumber: 29
                             }, this),
                             !isAuth() && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
@@ -49805,7 +49805,7 @@ function Navbar({ user  }) {
                                 children: "Sign-in"
                             }, void 0, false, {
                                 fileName: "src/components/navbar/navbar.jsx",
-                                lineNumber: 35,
+                                lineNumber: 36,
                                 columnNumber: 29
                             }, this),
                             !isAuth() && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
@@ -49813,29 +49813,29 @@ function Navbar({ user  }) {
                                 children: "Sign-up"
                             }, void 0, false, {
                                 fileName: "src/components/navbar/navbar.jsx",
-                                lineNumber: 38,
+                                lineNumber: 39,
                                 columnNumber: 29
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/navbar/navbar.jsx",
-                        lineNumber: 27,
+                        lineNumber: 28,
                         columnNumber: 21
                     }, this)
                 }, void 0, false, {
                     fileName: "src/components/navbar/navbar.jsx",
-                    lineNumber: 26,
+                    lineNumber: 27,
                     columnNumber: 17
                 }, this)
             ]
         }, void 0, true, {
             fileName: "src/components/navbar/navbar.jsx",
-            lineNumber: 24,
+            lineNumber: 25,
             columnNumber: 13
         }, this)
     }, void 0, false, {
         fileName: "src/components/navbar/navbar.jsx",
-        lineNumber: 23,
+        lineNumber: 24,
         columnNumber: 9
     }, this);
 }

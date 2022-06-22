@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
+
 export function Navbar({user}) {
 
     const onLoggedOut = () => {
@@ -29,7 +30,7 @@ export function Navbar({user}) {
                             <Nav.Link href={`/users/${user}`}></Nav.Link>
                         )}
                         {isAuth() && (
-                            <Button variant="link" onClick={() => { this.onLoggedOut() }}>Logout</Button>
+                            <Button variant="link" onClick={() => { onLoggedOut() }}>Logout</Button>
                         )}
                         {!isAuth() && (
                             <Nav.Link href="/">Sign-in</Nav.Link>
