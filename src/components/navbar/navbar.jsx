@@ -5,10 +5,10 @@ export function Navbar({user}) {
     const onLoggedOut = () => {
         localStorage.clear();
         window.open("/", "_self");
-    }
+    };
 
     const isAuth = () => {
-        if(typeof window == "undefined") {
+        if (typeof window == "undefined") {
             return false;
         }
         if (localStorage.getItem("token")) {
