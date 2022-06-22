@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Container, Col, Row } from 'react-bootstrap';
-// import './profile-view.scss';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
