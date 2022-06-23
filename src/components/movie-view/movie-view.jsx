@@ -1,6 +1,6 @@
 import React from 'react';
-
-
+import { Link } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 export class MovieView extends React.Component {
 
 
@@ -8,11 +8,11 @@ export class MovieView extends React.Component {
         console.log(event.key);
     }
 
-    componentDidMount() {
+    UNSAFE_componentDidMount() {
         document.addEventListener('keypress', this.keypressCallback);
     }
    
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         document.removeEventListener('keypress', this.keypressCallback);
     }
 
