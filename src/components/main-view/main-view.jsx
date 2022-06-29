@@ -1,13 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-import { setMovies } from '../../actions/actions';
+import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
+import { setMovies, setUser } from '../../actions/actions';
 import  MoviesList  from '../movies-list/movies-list';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
-import { Navbar } from '../navbar/navbar';
+import { Menubar } from '../navbar/navbar';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import  ProfileView  from '../profile-view/profile-view';
@@ -48,7 +48,7 @@ class MainView extends React.Component {
     
     getMovies(token) {
       axios.get('https://movieappcf.herokuapp.com/movies', {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token}` },
       })
       .then(response => {
         this.props.setMovies(response.data);
@@ -78,12 +78,13 @@ class MainView extends React.Component {
     render() {
 
       let { movies } = this.props;
-      let { user } = this.state;
+      let { user } = this.props;
     
         return (
           <Router>
-             <Navbar user={user} />
+             <Menubar user={user} />
               <Row className="main-view justify-content-md-center">
+              <Switch>
                 <Route exact path="/" render={() => {
                   if (!user) return <Col>
                     <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
@@ -120,7 +121,7 @@ class MainView extends React.Component {
                   </Col>
                   }} />
 
-                <Route path="/genre/:name" render={({ match, history }) => {
+                <Route path="/genres/:name" render={({ match, history }) => {
                    if (!user) return <Col>
                    <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
                      </Col>                  
@@ -136,7 +137,7 @@ class MainView extends React.Component {
                       </Col>                   
                     if (movies.length === 0) return <div className="main-view" />;
                       return <Col>
-                      <ProfileView history={histoy} movies={movies} user={user === match.params.username} onBackClick={() => history.goBack()} />
+                      <ProfileView history={history} movies={movies} user={user === match.params.username} onBackClick={() => history.goBack()} />
                     </Col>
                   }} />
                 
@@ -148,7 +149,8 @@ class MainView extends React.Component {
                       return <Col>
                       <UserUpdate user={user} onBackClick={() => history.goBack()} />
                     </Col>
-                  }} />              
+                  }} />   
+                 </Switch>           
               </Row>
             </Router>
         );
@@ -156,8 +158,10 @@ class MainView extends React.Component {
     }
 
     let mapStateToProps = state => {
-      return { movies: state.movies }
+      return { movies: state.movies, 
+               user: state.user
+      }
     }
     
     // #8
-    export default connect(mapStateToProps, { setMovies } )(MainView);
+    export default connect(mapStateToProps, { setMovies, setUser } )(MainView);

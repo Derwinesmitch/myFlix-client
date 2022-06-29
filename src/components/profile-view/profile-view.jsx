@@ -7,14 +7,15 @@ import { FavouriteMoviesView } from './favourite-movie-view';
 import { UpdateView } from './update-view';
 
 export function ProfileView({props}) {
-        const [ user, setUser ] = useState(props.user)
-        const [ movies, setMovies ] = useState(props.movies)
+        const [ user, setUser ] = useState(props.user); 
+        // const [ movies, setMovies ] = useState(props.movies);
         const [ favouriteMovies, setFavouriteMovies ] = useState([]);
-        const currentUser = localStorage.getItem('user');
         const token = localStorage.getItem('token');
 
 const getUser = () => {
-        axios.get(`https://movieappcf.herokuapp.com/users/${currentUser}`, {
+        const username = localStorage.getItem('user');
+
+        axios.get(`https://movieappcf.herokuapp.com/users/${props.user}`, {
                 headers: { Authorization: `Bearer ${token}`}
         })
         .then(response => {
@@ -29,7 +30,7 @@ useEffect(() => {
 }, [])
 
 const handleDelete = () => {
-        axios.delete(`https://movieappcf.herokuapp.com/users/${currentUser}`, {
+        axios.delete(`https://movieappcf.herokuapp.com/users/${username}`, {
                 headers: {Authorization: `Bearer ${token}`}
         })
         .then(() => {
@@ -64,7 +65,7 @@ return(
                 <FavouriteMoviesView
                 movies={movies}
                 favouriteMovies={favouriteMovies}
-                currentUser={currentUser}
+                username={username}
                 token={token}/>
             </Row>
             <UpdateView user={user}/>
@@ -72,3 +73,9 @@ return(
         </Container>
 )
 }
+
+ProfileView.PropTypes = {
+
+        username: PropTypes.string.isRequired,
+        password: PropTypes.string.isRequired,
+      }

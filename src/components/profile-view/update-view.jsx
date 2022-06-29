@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-import { Button, Container, Col, Row, Button, Form } from 'react-bootstrap';
+import { Button, Container, Col, Row, Form } from 'react-bootstrap';
 
 export function UpdateView(props) {
     const { user } = props;

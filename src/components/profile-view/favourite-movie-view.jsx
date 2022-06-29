@@ -5,7 +5,7 @@ import { Card, Button, Col } from 'react-bootstrap';
 
 
 export function FavouriteMoviesView(props) {
-    const { movies, favouriteMovies, currentUser, token } = props;
+    const { movies, favouriteMovies, username, token } = props;
 
     const favouriteMoviesId = favouriteMovies.map(m => m._id)
     const favouriteMoviesList = movies.filter(m => {
@@ -16,7 +16,7 @@ export function FavouriteMoviesView(props) {
 
 
     const handleMovieDelete = (movieId) => {
-        axios.delete(`https://movieappcf.herokuapp.com/users/${currentUser}/movies/${movieId}`, {
+        axios.delete(`https://movieappcf.herokuapp.com/users/${username}/movies/${movieId}`, {
             headers: { Authorization: `Bearer ${token}`}
         })
         .then(() => {

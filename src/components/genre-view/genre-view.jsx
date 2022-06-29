@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-
 import { Button, Container, Col, Row } from 'react-bootstrap';
 
 export class GenreView extends React.Component {
@@ -26,6 +25,6 @@ export class GenreView extends React.Component {
 GenreView.propTypes = {
     genre: PropTypes.shape({
         Name: PropTypes.string.isRequired,
-        Description: PropTypes.string.isRequired,
-    }).isRequired
+        Description: PropTypes.string.isRequired
+    }).isRequired,
 };
