@@ -4,8 +4,8 @@ import axios from 'axios';
 
 import { Button, Container, Col, Row, Form } from 'react-bootstrap';
 
-export function UpdateView(props) {
-    const { user } = props;
+export function UpdateView() {
+    // const { user } = props;
     const [ username, setUsername ] = useState('');
     const [ password, setPassword ] = useState('');
     const [ email, setEmail ] = useState('');
@@ -15,7 +15,8 @@ export function UpdateView(props) {
         passwordErr: '',
         emailErr: ','
     });
-
+    
+    const userToken = localStorage.getItem('user');
 const validate =() => {
     let isReq = true;
     if(!username) {
@@ -46,11 +47,11 @@ const validate =() => {
 const handleSubmit = (e) => {
     e.preventDefault();
     const isReq = validate();
+    const token = localStorage.getItem('token');
     if(isReq) {
-        const token = localStorage.getItem('token');
-      axios.put(`https://movieappcf.herokuapp.com/users/${user.Username}`, {
+      axios.put(`https://movieappcf.herokuapp.com/users/${userToken}`, {
           Username: username,
-          Password: password,
+          Password: password,   
           Email: email,
           Birthday: birthday
       },

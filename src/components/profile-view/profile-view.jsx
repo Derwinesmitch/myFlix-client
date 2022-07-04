@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { Button, Container, Col, Row } from 'react-bootstrap';
 import axios from 'axios';
-import PropTypes from 'prop-types';
 
 import { FavouriteMoviesView } from './favourite-movie-view';
 import { UpdateView } from './update-view';
 
 export function ProfileView({props}) {
-        const [ user, setUser ] = useState(props.user); 
+        const [ user, setUser ] = useState({}); 
         // const [ movies, setMovies ] = useState(props.movies);
+        const [ updatedUser, setUpdatedUser] = useState({});
         const [ favouriteMovies, setFavouriteMovies ] = useState([]);
         const token = localStorage.getItem('token');
 
@@ -20,23 +21,25 @@ const getUser = () => {
         })
         .then(response => {
                 setUser(response.data);
+                setUpdatedUser(response.data);
                 setFavouriteMovies(response.data.FavouriteMovies)
         })
         .catch(error => console.error(error))
 }
 
-useEffect(() => {
-        getUser();
-}, [])
 
 const handleDelete = () => {
+        const token = localStorage.getItem('token');
+        const username = localstorage.getItem('user');
+
         axios.delete(`https://movieappcf.herokuapp.com/users/${username}`, {
                 headers: {Authorization: `Bearer ${token}`}
         })
         .then(() => {
                 alert(`Account ${user.userName} was successfully deleted`)
-                localStorage.clear();
-                window.open('/register', '_self');
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                window.open('/', '_self');
         }).
         catch(error => console.error(error))
 }
@@ -61,13 +64,13 @@ return(
                 <Col className="value">{user.Birthday}</Col>
             </Row>
             <Row className="mt-5"><h4>Favourite movie list</h4></Row> 
-            <Row className="mt-3"> 
+            {/* <Row className="mt-3"> 
                 <FavouriteMoviesView
                 movies={movies}
                 favouriteMovies={favouriteMovies}
                 username={username}
                 token={token}/>
-            </Row>
+            </Row> */}
             <UpdateView user={user}/>
             <Button className="d-block mt-5" variant="warning" size="sm" onClick={handleDelete}>Delete the profile</Button>
         </Container>
