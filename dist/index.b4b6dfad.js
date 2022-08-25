@@ -61255,13 +61255,8 @@ var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _reactBootstrap = require("react-bootstrap");
-var _actions = require("../../actions/actions");
-var _s = $RefreshSig$();
-function FavouriteMoviesView() {
-    _s();
-    const movies = useSelector(state);
-    const favouritemovies = userSelector(state);
-    const dispatch = useDispatch();
+function FavouriteMoviesView(props) {
+    const { movies , favouriteMovies , username , token  } = props;
     const favouriteMoviesId = favouriteMovies.map((m)=>m._id);
     const favouriteMoviesList = movies.filter((m)=>{
         return favouriteMoviesId.includes(m._id);
@@ -61281,7 +61276,7 @@ function FavouriteMoviesView() {
             children: "There are no movies in the list"
         }, void 0, false, {
             fileName: "src/components/profile-view/favourite-movie-view.jsx",
-            lineNumber: 35,
+            lineNumber: 33,
             columnNumber: 13
         }, this) : favouriteMoviesList.map((movie)=>{
             return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
@@ -61299,12 +61294,12 @@ function FavouriteMoviesView() {
                                 src: movie.ImagePath
                             }, void 0, false, {
                                 fileName: "src/components/profile-view/favourite-movie-view.jsx",
-                                lineNumber: 42,
+                                lineNumber: 40,
                                 columnNumber: 33
                             }, this)
                         }, void 0, false, {
                             fileName: "src/components/profile-view/favourite-movie-view.jsx",
-                            lineNumber: 41,
+                            lineNumber: 39,
                             columnNumber: 29
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
@@ -61313,14 +61308,14 @@ function FavouriteMoviesView() {
                                     children: movie.Title
                                 }, void 0, false, {
                                     fileName: "src/components/profile-view/favourite-movie-view.jsx",
-                                    lineNumber: 45,
+                                    lineNumber: 43,
                                     columnNumber: 33
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Text, {
                                     children: movie.Description
                                 }, void 0, false, {
                                     fileName: "src/components/profile-view/favourite-movie-view.jsx",
-                                    lineNumber: 46,
+                                    lineNumber: 44,
                                     columnNumber: 33
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Link, {
@@ -61332,12 +61327,12 @@ function FavouriteMoviesView() {
                                         children: "Open list"
                                     }, void 0, false, {
                                         fileName: "src/components/profile-view/favourite-movie-view.jsx",
-                                        lineNumber: 48,
+                                        lineNumber: 46,
                                         columnNumber: 37
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "src/components/profile-view/favourite-movie-view.jsx",
-                                    lineNumber: 47,
+                                    lineNumber: 45,
                                     columnNumber: 33
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
@@ -61350,34 +61345,33 @@ function FavouriteMoviesView() {
                                     children: "Remove "
                                 }, void 0, false, {
                                     fileName: "src/components/profile-view/favourite-movie-view.jsx",
-                                    lineNumber: 50,
+                                    lineNumber: 48,
                                     columnNumber: 33
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/profile-view/favourite-movie-view.jsx",
-                            lineNumber: 44,
+                            lineNumber: 42,
                             columnNumber: 29
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/profile-view/favourite-movie-view.jsx",
-                    lineNumber: 40,
+                    lineNumber: 38,
                     columnNumber: 25
                 }, this)
             }, void 0, false, {
                 fileName: "src/components/profile-view/favourite-movie-view.jsx",
-                lineNumber: 39,
+                lineNumber: 37,
                 columnNumber: 21
             }, this);
         })
     }, void 0, false, {
         fileName: "src/components/profile-view/favourite-movie-view.jsx",
-        lineNumber: 33,
+        lineNumber: 31,
         columnNumber: 5
     }, this);
 }
-_s(FavouriteMoviesView, "elsi2S9AkUrlSTgVjS5tbn0pTi8=", true);
 _c = FavouriteMoviesView;
 var _c;
 $RefreshReg$(_c, "FavouriteMoviesView");
@@ -61387,7 +61381,7 @@ $RefreshReg$(_c, "FavouriteMoviesView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","prop-types":"7wKI2","axios":"jo6P5","react-bootstrap":"3AD9A","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../actions/actions":"biFwH"}],"fs4jm":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","prop-types":"7wKI2","axios":"jo6P5","react-bootstrap":"3AD9A","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"fs4jm":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$b77c = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;

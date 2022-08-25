@@ -31,7 +31,7 @@ const getUser = () => {
 const handleDelete = () => {
         const token = localStorage.getItem('token');
         const username = localstorage.getItem('user');
-
+        
         axios.delete(`https://movieappcf.herokuapp.com/users/${username}`, {
                 headers: {Authorization: `Bearer ${token}`}
         })

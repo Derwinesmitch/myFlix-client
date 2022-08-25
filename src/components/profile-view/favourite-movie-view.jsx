@@ -3,13 +3,11 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Card, Button, Col } from 'react-bootstrap';
 
-import { setUser } from "../../actions/actions"
 
-export function FavouriteMoviesView() {
-    const movies = useSelector((state)) => state.movies);
-    const favouritemovies = userSelector((state)) => state.user.FavouriteMovies) || [];
-    const dispatch = useDispatch();
- 
+
+export function FavouriteMoviesView(props) {
+    const { movies, favouriteMovies, username, token } = props;
+
     const favouriteMoviesId = favouriteMovies.map(m => m._id)
     const favouriteMoviesList = movies.filter(m => {
         return favouriteMoviesId.includes(m._id)
