@@ -15,12 +15,12 @@ import { Container, Col, Row } from 'react-bootstrap';
 
 
 class MainView extends React.Component {
-    // constructor() {
-    //     super();
-    //     this.state = {
-    //         user: null,
-    //     };
-    // }
+    constructor() {
+        super();
+        // this.state = {
+        //     user: null,
+        // };
+    }
 
 
     componentDidMount(){
@@ -37,14 +37,13 @@ class MainView extends React.Component {
   
 
         onLoggedIn(authData)  {
-      
           console.log(authData);
-      
       //     this.setState({
       //       user: authData.user.Username
       // });
-      const { setUser } = this.props;
-      setUser(authData.user.Username);
+      // const { setUser } = this.props;
+      // setUser(authData.user.Username);
+      this.props.setUser({ user: authData.user.Username, });
       localStorage.setItem('token', authData.token);
       localStorage.setItem('user', authData.user.Username);
       this.getMovies(authData.token);
@@ -85,18 +84,23 @@ class MainView extends React.Component {
       let { movies } = this.props;
       let { user } = this.props;
     
+      let localUser = localStorage.getItem('user');
         return (
           <Router>
              <Menubar user={user} />
               <Row className="main-view justify-content-md-center">
               <Switch>
                 <Route exact path="/" render={() => {
-                  if (!user) return <Col>
-                    <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
-                      </Col>
+                  if (!user) return(
+                  <Row>
+                    <Col>
+                      <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
+                    </Col>
+                  </Row>
+                  );
                   if (movies.length === 0) return <div className="main-view" />;
       
-                  return <MoviesList movies={movies}/>;
+                  return <MoviesList movies={movies} />;
                   }} />
 
                 <Route path="/register" render={() => {
@@ -162,11 +166,11 @@ class MainView extends React.Component {
       }
     }
 
-    let mapStateToProps = state => {
+    let mapStateToProps = (state) => {
       return { movies: state.movies, 
                user: state.user
-      }
-    }
+      };
+    };
     
     // #8
     export default connect(mapStateToProps, { setMovies, setUser })(MainView);

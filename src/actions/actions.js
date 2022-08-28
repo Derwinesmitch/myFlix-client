@@ -6,21 +6,21 @@ export const SET_USER = 'SET_USER';
 export function setMovies(value) {
   return { 
     type: SET_MOVIES,
-    value
+    value,
   };
 }
 
 export function setFilter(value) {
   return { 
     type: SET_FILTER,
-    value
+    value,
   };
 }
 
 
-export function setUser(value) {
+export function setUser(user) {
   return { 
     type: SET_USER,
-    value
+    value,
   };
 }
