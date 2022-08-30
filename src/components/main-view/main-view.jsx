@@ -26,15 +26,29 @@ class MainView extends React.Component {
     componentDidMount(){
      let accessToken = localStorage.getItem('token');
      if (accessToken !== null) {
-    
-            this.getMovies(accessToken);
+         this.props.setUser({
+          user: localStorage.getItem('user'),
+         });
+         this.getMovies(accessToken);
+
+        
       //       this.setState({
       //         user: localStorage.getItem('user')
       //  });
-            this.props.setUser(localStorage.getItem('user'));
        }
     }
   
+    getMovies(token) {
+      axios.get('https://movieappcf.herokuapp.com/movies', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        this.props.setMovies(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
 
         onLoggedIn(authData)  {
           console.log(authData);
@@ -50,24 +64,13 @@ class MainView extends React.Component {
     }
     
     
-    getMovies(token) {
-      axios.get('https://movieappcf.herokuapp.com/movies', {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then(response => {
-        this.props.setMovies(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-    }
 
 
-    onRegistration(register){
-      this.setState({
-          register,
-      });
-    }
+    // onRegistration(register){
+    //   this.setState({
+    //       register,
+    //   });
+    // }
 
 
 
@@ -88,8 +91,9 @@ class MainView extends React.Component {
         return (
           <Router>
              <Menubar user={user} />
+             <Container>
+              <console className="log">something</console>
               <Row className="main-view justify-content-md-center">
-              <Switch>
                 <Route exact path="/" render={() => {
                   if (!user) return(
                   <Row>
@@ -140,8 +144,8 @@ class MainView extends React.Component {
                     </Col>
                   }} />
 
-                <Route path={`/users/${user}`} render={({history, match}) => {
-                    if (!user) return 
+                <Route path={`/users/${user}`} render={({history}) => {
+                    if (!localUser) return 
                     <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
                                        
                     if (movies.length === 0) return <div className="main-view" />;
@@ -159,8 +163,7 @@ class MainView extends React.Component {
                       <UserUpdate user={user} onBackClick={() => history.goBack()} />
                     </Col>
                   }} />   
-                 </Switch>           
-              </Row>
+              </Row></Container>
             </Router>
         );
       }
@@ -168,7 +171,7 @@ class MainView extends React.Component {
 
     let mapStateToProps = (state) => {
       return { movies: state.movies, 
-               user: state.user
+               user: state.user,
       };
     };
     

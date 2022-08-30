@@ -4,22 +4,24 @@ import Button from "react-bootstrap/Button";
 export class MovieView extends React.Component {
 
 
-    keypressCallback(event) {
-        console.log(event.key);
-    }
+    // keypressCallback(event) {
+    //     console.log(event.key);
+    // }
 
-    UNSAFE_componentDidMount() {
-        document.addEventListener('keypress', this.keypressCallback);
-    }
+    // componentDidMount() {
+    //     document.addEventListener('keypress', this.keypressCallback);
+    // }
    
-    UNSAFE_componentWillMount() {
-        document.removeEventListener('keypress', this.keypressCallback);
-    }
+    // componentWillMount() {
+    //     document.removeEventListener('keypress', this.keypressCallback);
+    // }
 
     render() {
         const { movie, onBackClick } = this.props;
 
         return (
+        <Container>
+
             <div className="movie-view">
                 <div className="movie-poster">
                     <img src={movie.ImagePath} />
@@ -41,6 +43,9 @@ export class MovieView extends React.Component {
                     <Button variant="link">Genre</Button>
                 </Link>
             </div>        
-        );
+         </Container>
+ 
+        );        
+
     }
 }
