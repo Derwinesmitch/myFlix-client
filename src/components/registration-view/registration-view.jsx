@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap';
 
 
 export function RegistrationView(props) {
@@ -70,43 +71,45 @@ const handleSubmit = (e) => {
 
 
 return (
-  <Row className="mt-4">
-    <Col md={12}>
-      <Form>
-        <h3>Sign Up</h3>
-        <p></p>
-        <Form.Group controlId="formUsername" className="reg-form-inputs">
-          <Form.Label>Username:</Form.Label>
-            <Form.Control type="text"  value={username} onChange={e => setUsername(e.target.value)} />
-              {values.usernameErr && <p>{values.usernameErr}</p>}
-        </Form.Group>
+  <Container>
+    <Row className="mt-4">
+      <Col md={12}>
+        <Form>
+          <h3>Sign Up</h3>
+          <p></p>
+          <Form.Group controlId="formUsername" className="reg-form-inputs">
+            <Form.Label>Username:</Form.Label>
+              <Form.Control type="text"  value={username} onChange={e => setUsername(e.target.value)} />
+                {values.usernameErr && <p>{values.usernameErr}</p>}
+          </Form.Group>
 
-        <Form.Group controlId="formPassword" className="reg-form-inputs">
-          <Form.Label>Password</Form.Label>
-            <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} />
-              {values.passwordErr && <p>{values.passwordErr}</p>}
-        </Form.Group>
+          <Form.Group controlId="formPassword" className="reg-form-inputs">
+            <Form.Label>Password</Form.Label>
+              <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} />
+                {values.passwordErr && <p>{values.passwordErr}</p>}
+          </Form.Group>
 
-        <Form.Group controlId="Email" className="reg-form-inputs">
-          <Form.Label>Email:</Form.Label>
-            <Form.Control type="email" value={email} onChange={e => setEmail(e.target.value)} />
-              {values.emailErr && <p>{values.emailErr}</p>}
-        </Form.Group>
+          <Form.Group controlId="Email" className="reg-form-inputs">
+            <Form.Label>Email:</Form.Label>
+              <Form.Control type="email" value={email} onChange={e => setEmail(e.target.value)} />
+                {values.emailErr && <p>{values.emailErr}</p>}
+          </Form.Group>
 
-        <Form.Group controlId="updateBirthday" className="reg-form-inputs">
-          <Form.Label>Birthday:</Form.Label>
-            <Form.Control type="date" name="birthday" onChange={e => setBirthday(e.target.value)}></Form.Control>
-             
-        </Form.Group>
+          <Form.Group controlId="updateBirthday" className="reg-form-inputs">
+            <Form.Label>Birthday:</Form.Label>
+              <Form.Control type="date" name="birthday" onChange={e => setBirthday(e.target.value)}></Form.Control>
+              
+          </Form.Group>
 
-        <Button variant="primary" type="submit" onClick={handleSubmit}>
-              Submit
-        </Button>
-        <p></p>
-        {/* <p>Already registered <Link to={'/'}>sign in</Link> here</p> */}
-      </Form>
-    </Col>
-  </Row>
+          <Button variant="primary" type="submit" onClick={handleSubmit}>
+                Submit
+          </Button>
+          <p></p>
+          {/* <p>Already registered <Link to={'/'}>sign in</Link> here</p> */}
+        </Form>
+      </Col>
+    </Row>
+    </Container>
 );
 }
 
