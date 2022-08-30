@@ -147,16 +147,16 @@ class MainView extends React.Component {
                     </Col>
                   }} />
 
-                <Route path={`/users/${user}`} render={({history}) => {
-                    if (!localUser) return 
-                    <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
-                                       
-                    if (movies.length === 0) return <div className="main-view" />;
-                      return <Col>
-                      <ProfileView history={history} movies={movies} user={user === match.params.username} onBackClick={() => history.goBack()} />
+                <Route path={`/users/${localUser}`}
+                render={() => {
+                  if (!user) return <Redirect to="/" />;
+                  return (
+                    <Col>
+                    <ProfileView user={user} movies={movies} logOut={() => this.onLoggedOut()}/>
                     </Col>
-                  }} />
-                
+                  );
+                }}
+                />
                 <Route path={`/user-update/${user}`} render={({match, history}) => {
                      if (!user) return <Col>
                      <LoginView onLoggedIn={user => this.onLoggedIn(user)} />

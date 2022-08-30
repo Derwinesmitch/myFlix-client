@@ -64,13 +64,6 @@ return(
                 <Col className="value">{user.Birthday}</Col>
             </Row>
             <Row className="mt-5"><h4>Favourite movie list</h4></Row> 
-            {/* <Row className="mt-3"> 
-                <FavouriteMoviesView
-                movies={movies}
-                favouriteMovies={favouriteMovies}
-                username={username}
-                token={token}/>
-            </Row> */}
             <UpdateView user={user}/>
             <Button className="d-block mt-5" variant="warning" size="sm" onClick={handleDelete}>Delete the profile</Button>
         </Container>

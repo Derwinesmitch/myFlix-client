@@ -28057,7 +28057,7 @@ class MainView extends (0, _reactDefault.default).Component {
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
                                 path: "/movies/:movieId",
-                                render: ({ match: match1 , history  })=>{
+                                render: ({ match , history  })=>{
                                     if (!user) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
                                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginView.LoginView), {
                                             onLoggedIn: (user)=>this.onLoggedIn(user)
@@ -28069,7 +28069,7 @@ class MainView extends (0, _reactDefault.default).Component {
                                     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
                                         md: 8,
                                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
-                                            movie: movies.find((m)=>m._id === match1.params.movieId),
+                                            movie: movies.find((m)=>m._id === match.params.movieId),
                                             onBackClick: ()=>history.goBack()
                                         }, void 0, false, void 0, void 0)
                                     }, void 0, false, void 0, void 0);
@@ -28081,7 +28081,7 @@ class MainView extends (0, _reactDefault.default).Component {
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
                                 path: "/directors/:name",
-                                render: ({ match: match1 , history  })=>{
+                                render: ({ match , history  })=>{
                                     if (!user) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
                                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginView.LoginView), {
                                             onLoggedIn: (user)=>this.onLoggedIn(user)
@@ -28093,7 +28093,7 @@ class MainView extends (0, _reactDefault.default).Component {
                                     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
                                         md: 8,
                                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _directorView.DirectorView), {
-                                            director: movies.find((m)=>m.Director.Name === match1.params.name).Director,
+                                            director: movies.find((m)=>m.Director.Name === match.params.name).Director,
                                             onBackClick: ()=>history.goBack()
                                         }, void 0, false, void 0, void 0)
                                     }, void 0, false, void 0, void 0);
@@ -28105,7 +28105,7 @@ class MainView extends (0, _reactDefault.default).Component {
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
                                 path: "/genres/:name",
-                                render: ({ match: match1 , history  })=>{
+                                render: ({ match , history  })=>{
                                     if (!user) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
                                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginView.LoginView), {
                                             onLoggedIn: (user)=>this.onLoggedIn(user)
@@ -28117,7 +28117,7 @@ class MainView extends (0, _reactDefault.default).Component {
                                     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
                                         md: 8,
                                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _genreView.GenreView), {
-                                            genre: movies.find((m)=>m.Genre.Name === match1.params.name).Genre,
+                                            genre: movies.find((m)=>m.Genre.Name === match.params.name).Genre,
                                             onBackClick: ()=>history.goBack()
                                         }, void 0, false, void 0, void 0)
                                     }, void 0, false, void 0, void 0);
@@ -28128,21 +28128,16 @@ class MainView extends (0, _reactDefault.default).Component {
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
-                                path: `/users/${user}`,
-                                render: ({ history  })=>{
-                                    if (!localUser) return;
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginView.LoginView), {
-                                        onLoggedIn: (user)=>this.onLoggedIn(user)
-                                    }, void 0, false, void 0, void 0);
-                                    if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                        className: "main-view"
+                                path: `/users/${localUser}`,
+                                render: ()=>{
+                                    if (!user) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Redirect), {
+                                        to: "/"
                                     }, void 0, false, void 0, void 0);
                                     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
                                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _profileView.ProfileView), {
-                                            history: history,
+                                            user: user,
                                             movies: movies,
-                                            user: user === match.params.username,
-                                            onBackClick: ()=>history.goBack()
+                                            logOut: ()=>this.onLoggedOut()
                                         }, void 0, false, void 0, void 0)
                                     }, void 0, false, void 0, void 0);
                                 }
@@ -28153,7 +28148,7 @@ class MainView extends (0, _reactDefault.default).Component {
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
                                 path: `/user-update/${user}`,
-                                render: ({ match: match1 , history  })=>{
+                                render: ({ match , history  })=>{
                                     if (!user) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
                                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginView.LoginView), {
                                             onLoggedIn: (user)=>this.onLoggedIn(user)
@@ -35312,7 +35307,35 @@ var _reactRouterDom = require("react-router-dom");
 var _button = require("react-bootstrap/Button");
 var _buttonDefault = parcelHelpers.interopDefault(_button);
 var _reactBootstrap = require("react-bootstrap");
+var _reactToastify = require("react-toastify");
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 class MovieView extends (0, _reactDefault.default).Component {
+    addMovie(movie) {
+        let username = localStorage.getItem("user");
+        let token = localStorage.getItem("token");
+        const notify = ()=>(0, _reactToastify.toast).success("Movie has been added!", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined
+            });
+        (0, _axiosDefault.default).put(`https://movieappcf.herokuapp.com/users/${username}/movies/${movie._Id}`, {}, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>{
+            console.log(response.data);
+        }).catch(function(error) {
+            console.log(error);
+        });
+        return notify();
+    }
     // keypressCallback(event) {
     //     console.log(event.key);
     // }
@@ -35334,12 +35357,12 @@ class MovieView extends (0, _reactDefault.default).Component {
                             src: movie.ImagePath
                         }, void 0, false, {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 29,
+                            lineNumber: 59,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 28,
+                        lineNumber: 58,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35350,7 +35373,7 @@ class MovieView extends (0, _reactDefault.default).Component {
                                 children: "Title: "
                             }, void 0, false, {
                                 fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 32,
+                                lineNumber: 62,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -35358,13 +35381,13 @@ class MovieView extends (0, _reactDefault.default).Component {
                                 children: movie.title
                             }, void 0, false, {
                                 fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 33,
+                                lineNumber: 63,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 31,
+                        lineNumber: 61,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35375,7 +35398,7 @@ class MovieView extends (0, _reactDefault.default).Component {
                                 children: "Description: "
                             }, void 0, false, {
                                 fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 36,
+                                lineNumber: 66,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -35383,13 +35406,13 @@ class MovieView extends (0, _reactDefault.default).Component {
                                 children: movie.Description
                             }, void 0, false, {
                                 fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 37,
+                                lineNumber: 67,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 35,
+                        lineNumber: 65,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -35399,7 +35422,7 @@ class MovieView extends (0, _reactDefault.default).Component {
                         children: "Back"
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 39,
+                        lineNumber: 69,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
@@ -35409,12 +35432,12 @@ class MovieView extends (0, _reactDefault.default).Component {
                             children: "Director"
                         }, void 0, false, {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 41,
+                            lineNumber: 71,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 40,
+                        lineNumber: 70,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
@@ -35424,23 +35447,33 @@ class MovieView extends (0, _reactDefault.default).Component {
                             children: "Genre"
                         }, void 0, false, {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 45,
+                            lineNumber: 75,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 44,
+                        lineNumber: 74,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
+                        onClick: ()=>{
+                            this.addMovie(movie);
+                        },
+                        children: "Add to Favorites"
+                    }, void 0, false, {
+                        fileName: "src/components/movie-view/movie-view.jsx",
+                        lineNumber: 77,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/movie-view/movie-view.jsx",
-                lineNumber: 27,
+                lineNumber: 57,
                 columnNumber: 13
             }, this)
         }, void 0, false, {
             fileName: "src/components/movie-view/movie-view.jsx",
-            lineNumber: 25,
+            lineNumber: 55,
             columnNumber: 9
         }, this);
     }
@@ -35451,7 +35484,7 @@ class MovieView extends (0, _reactDefault.default).Component {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"cHIiW","react-bootstrap/Button":"aPzUt","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-bootstrap":"3AD9A"}],"3AD9A":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"cHIiW","react-bootstrap/Button":"aPzUt","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-bootstrap":"3AD9A","react-toastify":"kSvyQ","axios":"jo6P5","prop-types":"7wKI2"}],"3AD9A":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Accordion", ()=>(0, _accordionDefault.default));
@@ -35708,7 +35741,7 @@ var _toggleButtonGroupDefault = parcelHelpers.interopDefault(_toggleButtonGroup)
 var _tooltip = require("./Tooltip");
 var _tooltipDefault = parcelHelpers.interopDefault(_tooltip);
 
-},{"./Accordion":false,"./AccordionContext":false,"./AccordionCollapse":false,"./AccordionButton":false,"./Alert":false,"./Anchor":false,"./Badge":false,"./Breadcrumb":false,"./BreadcrumbItem":false,"./Button":"aPzUt","./ButtonGroup":false,"./ButtonToolbar":false,"./Card":"lAynp","./CardImg":"1reTi","./CardGroup":"2j3Ij","./Carousel":false,"./CarouselItem":false,"./CloseButton":"1wmVl","./Col":"2L2I6","./Collapse":"acuzI","./Dropdown":false,"./DropdownButton":false,"./Fade":"aH18S","./Form":"iBZ80","./FormControl":"iynMc","./FormCheck":"idkr0","./FormFloating":"aj346","./FloatingLabel":"coYzo","./FormGroup":"1qBHH","./FormLabel":"66epi","./FormText":"ffeC7","./FormSelect":"hHWyB","./Container":"hEdsw","./Image":false,"./Figure":false,"./InputGroup":false,"./ListGroup":false,"./ListGroupItem":false,"./Modal":false,"./ModalBody":false,"./ModalDialog":false,"./ModalHeader":false,"./ModalFooter":false,"./ModalTitle":false,"./Nav":"cXyL2","./Navbar":"1mHjo","./NavbarBrand":"iOo4v","./NavDropdown":false,"./NavItem":"ew05W","./NavLink":"7geL8","./Offcanvas":"eC3RS","./OffcanvasHeader":"a6xAh","./OffcanvasTitle":"77qdX","./OffcanvasBody":"fX7Bo","./Overlay":false,"./OverlayTrigger":false,"./PageItem":false,"./Pagination":false,"./Placeholder":false,"./PlaceholderButton":false,"./Popover":false,"./PopoverHeader":false,"./PopoverBody":false,"./ProgressBar":false,"./Ratio":false,"./Row":"cMC39","./Spinner":false,"./SplitButton":false,"./SSRProvider":false,"./Stack":false,"./Tab":false,"./TabContainer":false,"./TabContent":false,"./Table":false,"./TabPane":false,"./Tabs":false,"./ThemeProvider":"dVixI","./Toast":false,"./ToastBody":false,"./ToastHeader":false,"./ToastContainer":false,"./ToggleButton":false,"./ToggleButtonGroup":false,"./Tooltip":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2j3Ij":[function(require,module,exports) {
+},{"./Accordion":false,"./AccordionContext":false,"./AccordionCollapse":false,"./AccordionButton":false,"./Alert":false,"./Anchor":false,"./Badge":false,"./Breadcrumb":false,"./BreadcrumbItem":false,"./Button":"aPzUt","./ButtonGroup":false,"./ButtonToolbar":false,"./Card":"lAynp","./CardImg":"1reTi","./CardGroup":"2j3Ij","./Carousel":false,"./CarouselItem":false,"./CloseButton":"1wmVl","./Col":"2L2I6","./Collapse":"acuzI","./Dropdown":false,"./DropdownButton":false,"./Fade":"aH18S","./Form":"iBZ80","./FormControl":"iynMc","./FormCheck":"idkr0","./FormFloating":"aj346","./FloatingLabel":"coYzo","./FormGroup":"1qBHH","./FormLabel":"66epi","./FormText":"ffeC7","./FormSelect":"hHWyB","./Container":"hEdsw","./Image":false,"./Figure":false,"./InputGroup":false,"./ListGroup":false,"./ListGroupItem":false,"./Modal":"aNVmp","./ModalBody":"e0aNG","./ModalDialog":"cwGGq","./ModalHeader":"cxgdE","./ModalFooter":"9SLlP","./ModalTitle":"kYqJp","./Nav":"cXyL2","./Navbar":"1mHjo","./NavbarBrand":"iOo4v","./NavDropdown":false,"./NavItem":"ew05W","./NavLink":"7geL8","./Offcanvas":"eC3RS","./OffcanvasHeader":"a6xAh","./OffcanvasTitle":"77qdX","./OffcanvasBody":"fX7Bo","./Overlay":false,"./OverlayTrigger":false,"./PageItem":false,"./Pagination":false,"./Placeholder":false,"./PlaceholderButton":false,"./Popover":false,"./PopoverHeader":false,"./PopoverBody":false,"./ProgressBar":false,"./Ratio":false,"./Row":"cMC39","./Spinner":false,"./SplitButton":false,"./SSRProvider":false,"./Stack":false,"./Tab":false,"./TabContainer":false,"./TabContent":false,"./Table":false,"./TabPane":false,"./Tabs":false,"./ThemeProvider":"dVixI","./Toast":false,"./ToastBody":false,"./ToastHeader":false,"./ToastContainer":false,"./ToggleButton":false,"./ToggleButtonGroup":false,"./Tooltip":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2j3Ij":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _createWithBsPrefix = require("./createWithBsPrefix");
@@ -36858,7 +36891,1041 @@ Fade.defaultProps = defaultProps;
 Fade.displayName = "Fade";
 exports.default = Fade;
 
-},{"classnames":"jocGM","react":"21dqq","react-transition-group/Transition":"cKsrS","./transitionEndListener":"68oh7","./triggerBrowserReflow":"eWjs5","./TransitionWrapper":"jKUqZ","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cXyL2":[function(require,module,exports) {
+},{"classnames":"jocGM","react":"21dqq","react-transition-group/Transition":"cKsrS","./transitionEndListener":"68oh7","./triggerBrowserReflow":"eWjs5","./TransitionWrapper":"jKUqZ","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aNVmp":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _classnames = require("classnames");
+var _classnamesDefault = parcelHelpers.interopDefault(_classnames);
+var _addEventListener = require("dom-helpers/addEventListener");
+var _addEventListenerDefault = parcelHelpers.interopDefault(_addEventListener);
+var _canUseDOM = require("dom-helpers/canUseDOM");
+var _canUseDOMDefault = parcelHelpers.interopDefault(_canUseDOM);
+var _ownerDocument = require("dom-helpers/ownerDocument");
+var _ownerDocumentDefault = parcelHelpers.interopDefault(_ownerDocument);
+var _removeEventListener = require("dom-helpers/removeEventListener");
+var _removeEventListenerDefault = parcelHelpers.interopDefault(_removeEventListener);
+var _scrollbarSize = require("dom-helpers/scrollbarSize");
+var _scrollbarSizeDefault = parcelHelpers.interopDefault(_scrollbarSize);
+var _useCallbackRef = require("@restart/hooks/useCallbackRef");
+var _useCallbackRefDefault = parcelHelpers.interopDefault(_useCallbackRef);
+var _useEventCallback = require("@restart/hooks/useEventCallback");
+var _useEventCallbackDefault = parcelHelpers.interopDefault(_useEventCallback);
+var _useMergedRefs = require("@restart/hooks/useMergedRefs");
+var _useMergedRefsDefault = parcelHelpers.interopDefault(_useMergedRefs);
+var _useWillUnmount = require("@restart/hooks/useWillUnmount");
+var _useWillUnmountDefault = parcelHelpers.interopDefault(_useWillUnmount);
+var _transitionEnd = require("dom-helpers/transitionEnd");
+var _transitionEndDefault = parcelHelpers.interopDefault(_transitionEnd);
+var _react = require("react");
+var _modal = require("@restart/ui/Modal");
+var _modalDefault = parcelHelpers.interopDefault(_modal);
+var _bootstrapModalManager = require("./BootstrapModalManager");
+var _fade = require("./Fade");
+var _fadeDefault = parcelHelpers.interopDefault(_fade);
+var _modalBody = require("./ModalBody");
+var _modalBodyDefault = parcelHelpers.interopDefault(_modalBody);
+var _modalContext = require("./ModalContext");
+var _modalContextDefault = parcelHelpers.interopDefault(_modalContext);
+var _modalDialog = require("./ModalDialog");
+var _modalDialogDefault = parcelHelpers.interopDefault(_modalDialog);
+var _modalFooter = require("./ModalFooter");
+var _modalFooterDefault = parcelHelpers.interopDefault(_modalFooter);
+var _modalHeader = require("./ModalHeader");
+var _modalHeaderDefault = parcelHelpers.interopDefault(_modalHeader);
+var _modalTitle = require("./ModalTitle");
+var _modalTitleDefault = parcelHelpers.interopDefault(_modalTitle);
+var _themeProvider = require("./ThemeProvider");
+var _jsxRuntime = require("react/jsx-runtime");
+const defaultProps = {
+    show: false,
+    backdrop: true,
+    keyboard: true,
+    autoFocus: true,
+    enforceFocus: true,
+    restoreFocus: true,
+    animation: true,
+    dialogAs: (0, _modalDialogDefault.default)
+};
+/* eslint-disable no-use-before-define, react/no-multi-comp */ function DialogTransition(props) {
+    return /*#__PURE__*/ (0, _jsxRuntime.jsx)((0, _fadeDefault.default), {
+        ...props,
+        timeout: null
+    });
+}
+function BackdropTransition(props) {
+    return /*#__PURE__*/ (0, _jsxRuntime.jsx)((0, _fadeDefault.default), {
+        ...props,
+        timeout: null
+    });
+}
+/* eslint-enable no-use-before-define */ const Modal = /*#__PURE__*/ _react.forwardRef(({ bsPrefix , className , style , dialogClassName , contentClassName , children , dialogAs: Dialog , "aria-labelledby": ariaLabelledby , "aria-describedby": ariaDescribedby , "aria-label": ariaLabel , /* BaseModal props */ show , animation , backdrop , keyboard , onEscapeKeyDown , onShow , onHide , container , autoFocus , enforceFocus , restoreFocus , restoreFocusOptions , onEntered , onExit , onExiting , onEnter , onEntering , onExited , backdropClassName , manager: propsManager , ...props }, ref)=>{
+    const [modalStyle, setStyle] = (0, _react.useState)({});
+    const [animateStaticModal, setAnimateStaticModal] = (0, _react.useState)(false);
+    const waitingForMouseUpRef = (0, _react.useRef)(false);
+    const ignoreBackdropClickRef = (0, _react.useRef)(false);
+    const removeStaticModalAnimationRef = (0, _react.useRef)(null);
+    const [modal, setModalRef] = (0, _useCallbackRefDefault.default)();
+    const mergedRef = (0, _useMergedRefsDefault.default)(ref, setModalRef);
+    const handleHide = (0, _useEventCallbackDefault.default)(onHide);
+    const isRTL = (0, _themeProvider.useIsRTL)();
+    bsPrefix = (0, _themeProvider.useBootstrapPrefix)(bsPrefix, "modal");
+    const modalContext = (0, _react.useMemo)(()=>({
+            onHide: handleHide
+        }), [
+        handleHide
+    ]);
+    function getModalManager() {
+        if (propsManager) return propsManager;
+        return (0, _bootstrapModalManager.getSharedManager)({
+            isRTL
+        });
+    }
+    function updateDialogStyle(node) {
+        if (!(0, _canUseDOMDefault.default)) return;
+        const containerIsOverflowing = getModalManager().getScrollbarWidth() > 0;
+        const modalIsOverflowing = node.scrollHeight > (0, _ownerDocumentDefault.default)(node).documentElement.clientHeight;
+        setStyle({
+            paddingRight: containerIsOverflowing && !modalIsOverflowing ? (0, _scrollbarSizeDefault.default)() : undefined,
+            paddingLeft: !containerIsOverflowing && modalIsOverflowing ? (0, _scrollbarSizeDefault.default)() : undefined
+        });
+    }
+    const handleWindowResize = (0, _useEventCallbackDefault.default)(()=>{
+        if (modal) updateDialogStyle(modal.dialog);
+    });
+    (0, _useWillUnmountDefault.default)(()=>{
+        (0, _removeEventListenerDefault.default)(window, "resize", handleWindowResize);
+        removeStaticModalAnimationRef.current == null || removeStaticModalAnimationRef.current();
+    }); // We prevent the modal from closing during a drag by detecting where the
+    // the click originates from. If it starts in the modal and then ends outside
+    // don't close.
+    const handleDialogMouseDown = ()=>{
+        waitingForMouseUpRef.current = true;
+    };
+    const handleMouseUp = (e)=>{
+        if (waitingForMouseUpRef.current && modal && e.target === modal.dialog) ignoreBackdropClickRef.current = true;
+        waitingForMouseUpRef.current = false;
+    };
+    const handleStaticModalAnimation = ()=>{
+        setAnimateStaticModal(true);
+        removeStaticModalAnimationRef.current = (0, _transitionEndDefault.default)(modal.dialog, ()=>{
+            setAnimateStaticModal(false);
+        });
+    };
+    const handleStaticBackdropClick = (e)=>{
+        if (e.target !== e.currentTarget) return;
+        handleStaticModalAnimation();
+    };
+    const handleClick = (e)=>{
+        if (backdrop === "static") {
+            handleStaticBackdropClick(e);
+            return;
+        }
+        if (ignoreBackdropClickRef.current || e.target !== e.currentTarget) {
+            ignoreBackdropClickRef.current = false;
+            return;
+        }
+        onHide == null || onHide();
+    };
+    const handleEscapeKeyDown = (e)=>{
+        if (!keyboard && backdrop === "static") {
+            // Call preventDefault to stop modal from closing in restart ui,
+            // then play our animation.
+            e.preventDefault();
+            handleStaticModalAnimation();
+        } else if (keyboard && onEscapeKeyDown) onEscapeKeyDown(e);
+    };
+    const handleEnter = (node, isAppearing)=>{
+        if (node) updateDialogStyle(node);
+        onEnter == null || onEnter(node, isAppearing);
+    };
+    const handleExit = (node)=>{
+        removeStaticModalAnimationRef.current == null || removeStaticModalAnimationRef.current();
+        onExit == null || onExit(node);
+    };
+    const handleEntering = (node, isAppearing)=>{
+        onEntering == null || onEntering(node, isAppearing); // FIXME: This should work even when animation is disabled.
+        (0, _addEventListenerDefault.default)(window, "resize", handleWindowResize);
+    };
+    const handleExited = (node)=>{
+        if (node) node.style.display = ""; // RHL removes it sometimes
+        onExited == null || onExited(node); // FIXME: This should work even when animation is disabled.
+        (0, _removeEventListenerDefault.default)(window, "resize", handleWindowResize);
+    };
+    const renderBackdrop = (0, _react.useCallback)((backdropProps)=>/*#__PURE__*/ (0, _jsxRuntime.jsx)("div", {
+            ...backdropProps,
+            className: (0, _classnamesDefault.default)(`${bsPrefix}-backdrop`, backdropClassName, !animation && "show")
+        }), [
+        animation,
+        backdropClassName,
+        bsPrefix
+    ]);
+    const baseModalStyle = {
+        ...style,
+        ...modalStyle
+    }; // If `display` is not set to block, autoFocus inside the modal fails
+    // https://github.com/react-bootstrap/react-bootstrap/issues/5102
+    baseModalStyle.display = "block";
+    const renderDialog = (dialogProps)=>/*#__PURE__*/ (0, _jsxRuntime.jsx)("div", {
+            role: "dialog",
+            ...dialogProps,
+            style: baseModalStyle,
+            className: (0, _classnamesDefault.default)(className, bsPrefix, animateStaticModal && `${bsPrefix}-static`),
+            onClick: backdrop ? handleClick : undefined,
+            onMouseUp: handleMouseUp,
+            "aria-label": ariaLabel,
+            "aria-labelledby": ariaLabelledby,
+            "aria-describedby": ariaDescribedby,
+            children: /*#__PURE__*/ (0, _jsxRuntime.jsx)(Dialog, {
+                ...props,
+                onMouseDown: handleDialogMouseDown,
+                className: dialogClassName,
+                contentClassName: contentClassName,
+                children: children
+            })
+        });
+    return /*#__PURE__*/ (0, _jsxRuntime.jsx)((0, _modalContextDefault.default).Provider, {
+        value: modalContext,
+        children: /*#__PURE__*/ (0, _jsxRuntime.jsx)((0, _modalDefault.default), {
+            show: show,
+            ref: mergedRef,
+            backdrop: backdrop,
+            container: container,
+            keyboard: true // Always set true - see handleEscapeKeyDown
+            ,
+            autoFocus: autoFocus,
+            enforceFocus: enforceFocus,
+            restoreFocus: restoreFocus,
+            restoreFocusOptions: restoreFocusOptions,
+            onEscapeKeyDown: handleEscapeKeyDown,
+            onShow: onShow,
+            onHide: onHide,
+            onEnter: handleEnter,
+            onEntering: handleEntering,
+            onEntered: onEntered,
+            onExit: handleExit,
+            onExiting: onExiting,
+            onExited: handleExited,
+            manager: getModalManager(),
+            transition: animation ? DialogTransition : undefined,
+            backdropTransition: animation ? BackdropTransition : undefined,
+            renderBackdrop: renderBackdrop,
+            renderDialog: renderDialog
+        })
+    });
+});
+Modal.displayName = "Modal";
+Modal.defaultProps = defaultProps;
+exports.default = Object.assign(Modal, {
+    Body: (0, _modalBodyDefault.default),
+    Header: (0, _modalHeaderDefault.default),
+    Title: (0, _modalTitleDefault.default),
+    Footer: (0, _modalFooterDefault.default),
+    Dialog: (0, _modalDialogDefault.default),
+    TRANSITION_DURATION: 300,
+    BACKDROP_TRANSITION_DURATION: 150
+});
+
+},{"classnames":"jocGM","dom-helpers/addEventListener":"c5x2p","dom-helpers/canUseDOM":"9AwUB","dom-helpers/ownerDocument":"2WpOk","dom-helpers/removeEventListener":"la8JB","dom-helpers/scrollbarSize":"lhsUa","@restart/hooks/useCallbackRef":"82p6M","@restart/hooks/useEventCallback":"7ONdq","@restart/hooks/useMergedRefs":"6hhuo","@restart/hooks/useWillUnmount":"2OOXI","dom-helpers/transitionEnd":"7hVJq","react":"21dqq","@restart/ui/Modal":"crj1M","./BootstrapModalManager":"lr1Yp","./Fade":"aH18S","./ModalBody":"e0aNG","./ModalContext":"2U4Zk","./ModalDialog":"cwGGq","./ModalFooter":"9SLlP","./ModalHeader":"cxgdE","./ModalTitle":"kYqJp","./ThemeProvider":"dVixI","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lhsUa":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _canUseDOM = require("./canUseDOM");
+var _canUseDOMDefault = parcelHelpers.interopDefault(_canUseDOM);
+var size;
+function scrollbarSize(recalc) {
+    if (!size && size !== 0 || recalc) {
+        if (0, _canUseDOMDefault.default) {
+            var scrollDiv = document.createElement("div");
+            scrollDiv.style.position = "absolute";
+            scrollDiv.style.top = "-9999px";
+            scrollDiv.style.width = "50px";
+            scrollDiv.style.height = "50px";
+            scrollDiv.style.overflow = "scroll";
+            document.body.appendChild(scrollDiv);
+            size = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+            document.body.removeChild(scrollDiv);
+        }
+    }
+    return size;
+}
+exports.default = scrollbarSize;
+
+},{"./canUseDOM":"9AwUB","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"82p6M":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _react = require("react");
+function useCallbackRef() {
+    return (0, _react.useState)(null);
+}
+exports.default = useCallbackRef;
+
+},{"react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7ONdq":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _react = require("react");
+var _useCommittedRef = require("./useCommittedRef");
+var _useCommittedRefDefault = parcelHelpers.interopDefault(_useCommittedRef);
+function useEventCallback(fn) {
+    var ref = (0, _useCommittedRefDefault.default)(fn);
+    return (0, _react.useCallback)(function() {
+        return ref.current && ref.current.apply(ref, arguments);
+    }, [
+        ref
+    ]);
+}
+exports.default = useEventCallback;
+
+},{"react":"21dqq","./useCommittedRef":"g5BYG","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"g5BYG":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _react = require("react");
+/**
+ * Creates a `Ref` whose value is updated in an effect, ensuring the most recent
+ * value is the one rendered with. Generally only required for Concurrent mode usage
+ * where previous work in `render()` may be discarded before being used.
+ *
+ * This is safe to access in an event handler.
+ *
+ * @param value The `Ref` value
+ */ function useCommittedRef(value) {
+    var ref = (0, _react.useRef)(value);
+    (0, _react.useEffect)(function() {
+        ref.current = value;
+    }, [
+        value
+    ]);
+    return ref;
+}
+exports.default = useCommittedRef;
+
+},{"react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2OOXI":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _useUpdatedRef = require("./useUpdatedRef");
+var _useUpdatedRefDefault = parcelHelpers.interopDefault(_useUpdatedRef);
+var _react = require("react");
+function useWillUnmount(fn) {
+    var onUnmount = (0, _useUpdatedRefDefault.default)(fn);
+    (0, _react.useEffect)(function() {
+        return function() {
+            return onUnmount.current();
+        };
+    }, []);
+}
+exports.default = useWillUnmount;
+
+},{"./useUpdatedRef":"cfaLu","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cfaLu":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _react = require("react");
+function useUpdatedRef(value) {
+    var valueRef = (0, _react.useRef)(value);
+    valueRef.current = value;
+    return valueRef;
+}
+exports.default = useUpdatedRef;
+
+},{"react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"crj1M":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+/* eslint-disable @typescript-eslint/no-use-before-define, react/prop-types */ var _activeElement = require("dom-helpers/activeElement");
+var _activeElementDefault = parcelHelpers.interopDefault(_activeElement);
+var _contains = require("dom-helpers/contains");
+var _containsDefault = parcelHelpers.interopDefault(_contains);
+var _canUseDOM = require("dom-helpers/canUseDOM");
+var _canUseDOMDefault = parcelHelpers.interopDefault(_canUseDOM);
+var _listen = require("dom-helpers/listen");
+var _listenDefault = parcelHelpers.interopDefault(_listen);
+var _react = require("react");
+var _reactDom = require("react-dom");
+var _reactDomDefault = parcelHelpers.interopDefault(_reactDom);
+var _useMounted = require("@restart/hooks/useMounted");
+var _useMountedDefault = parcelHelpers.interopDefault(_useMounted);
+var _useWillUnmount = require("@restart/hooks/useWillUnmount");
+var _useWillUnmountDefault = parcelHelpers.interopDefault(_useWillUnmount);
+var _usePrevious = require("@restart/hooks/usePrevious");
+var _usePreviousDefault = parcelHelpers.interopDefault(_usePrevious);
+var _useEventCallback = require("@restart/hooks/useEventCallback");
+var _useEventCallbackDefault = parcelHelpers.interopDefault(_useEventCallback);
+var _modalManager = require("./ModalManager");
+var _modalManagerDefault = parcelHelpers.interopDefault(_modalManager);
+var _useWaitForDOMRef = require("./useWaitForDOMRef");
+var _useWaitForDOMRefDefault = parcelHelpers.interopDefault(_useWaitForDOMRef);
+var _useWindow = require("./useWindow");
+var _useWindowDefault = parcelHelpers.interopDefault(_useWindow);
+var _jsxRuntime = require("react/jsx-runtime");
+const _excluded = [
+    "show",
+    "role",
+    "className",
+    "style",
+    "children",
+    "backdrop",
+    "keyboard",
+    "onBackdropClick",
+    "onEscapeKeyDown",
+    "transition",
+    "backdropTransition",
+    "autoFocus",
+    "enforceFocus",
+    "restoreFocus",
+    "restoreFocusOptions",
+    "renderDialog",
+    "renderBackdrop",
+    "manager",
+    "container",
+    "onShow",
+    "onHide",
+    "onExit",
+    "onExited",
+    "onExiting",
+    "onEnter",
+    "onEntering",
+    "onEntered"
+];
+function _objectWithoutPropertiesLoose(source, excluded) {
+    if (source == null) return {};
+    var target = {};
+    var sourceKeys = Object.keys(source);
+    var key, i;
+    for(i = 0; i < sourceKeys.length; i++){
+        key = sourceKeys[i];
+        if (excluded.indexOf(key) >= 0) continue;
+        target[key] = source[key];
+    }
+    return target;
+}
+let manager;
+function getManager(window) {
+    if (!manager) manager = new (0, _modalManagerDefault.default)({
+        ownerDocument: window == null ? void 0 : window.document
+    });
+    return manager;
+}
+function useModalManager(provided) {
+    const window = (0, _useWindowDefault.default)();
+    const modalManager = provided || getManager(window);
+    const modal = (0, _react.useRef)({
+        dialog: null,
+        backdrop: null
+    });
+    return Object.assign(modal.current, {
+        add: ()=>modalManager.add(modal.current),
+        remove: ()=>modalManager.remove(modal.current),
+        isTopModal: ()=>modalManager.isTopModal(modal.current),
+        setDialogRef: (0, _react.useCallback)((ref)=>{
+            modal.current.dialog = ref;
+        }, []),
+        setBackdropRef: (0, _react.useCallback)((ref)=>{
+            modal.current.backdrop = ref;
+        }, [])
+    });
+}
+const Modal = /*#__PURE__*/ (0, _react.forwardRef)((_ref, ref)=>{
+    let { show =false , role ="dialog" , className , style , children , backdrop =true , keyboard =true , onBackdropClick , onEscapeKeyDown , transition , backdropTransition , autoFocus =true , enforceFocus =true , restoreFocus =true , restoreFocusOptions , renderDialog , renderBackdrop =(props)=>/*#__PURE__*/ (0, _jsxRuntime.jsx)("div", Object.assign({}, props)) , manager: providedManager , container: containerRef , onShow , onHide =()=>{} , onExit , onExited , onExiting , onEnter , onEntering , onEntered  } = _ref, rest = _objectWithoutPropertiesLoose(_ref, _excluded);
+    const container = (0, _useWaitForDOMRefDefault.default)(containerRef);
+    const modal = useModalManager(providedManager);
+    const isMounted = (0, _useMountedDefault.default)();
+    const prevShow = (0, _usePreviousDefault.default)(show);
+    const [exited, setExited] = (0, _react.useState)(!show);
+    const lastFocusRef = (0, _react.useRef)(null);
+    (0, _react.useImperativeHandle)(ref, ()=>modal, [
+        modal
+    ]);
+    if ((0, _canUseDOMDefault.default) && !prevShow && show) lastFocusRef.current = (0, _activeElementDefault.default)();
+    if (!transition && !show && !exited) setExited(true);
+    else if (show && exited) setExited(false);
+    const handleShow = (0, _useEventCallbackDefault.default)(()=>{
+        modal.add();
+        removeKeydownListenerRef.current = (0, _listenDefault.default)(document, "keydown", handleDocumentKeyDown);
+        removeFocusListenerRef.current = (0, _listenDefault.default)(document, "focus", // and so steals focus from it
+        ()=>setTimeout(handleEnforceFocus), true);
+        if (onShow) onShow();
+         // autofocus after onShow to not trigger a focus event for previous
+        // modals before this one is shown.
+        if (autoFocus) {
+            const currentActiveElement = (0, _activeElementDefault.default)(document);
+            if (modal.dialog && currentActiveElement && !(0, _containsDefault.default)(modal.dialog, currentActiveElement)) {
+                lastFocusRef.current = currentActiveElement;
+                modal.dialog.focus();
+            }
+        }
+    });
+    const handleHide = (0, _useEventCallbackDefault.default)(()=>{
+        modal.remove();
+        removeKeydownListenerRef.current == null || removeKeydownListenerRef.current();
+        removeFocusListenerRef.current == null || removeFocusListenerRef.current();
+        if (restoreFocus) {
+            var _lastFocusRef$current;
+            // Support: <=IE11 doesn't support `focus()` on svg elements (RB: #917)
+            (_lastFocusRef$current = lastFocusRef.current) == null || _lastFocusRef$current.focus == null || _lastFocusRef$current.focus(restoreFocusOptions);
+            lastFocusRef.current = null;
+        }
+    }); // TODO: try and combine these effects: https://github.com/react-bootstrap/react-overlays/pull/794#discussion_r409954120
+    // Show logic when:
+    //  - show is `true` _and_ `container` has resolved
+    (0, _react.useEffect)(()=>{
+        if (!show || !container) return;
+        handleShow();
+    }, [
+        show,
+        container,
+        /* should never change: */ handleShow
+    ]); // Hide cleanup logic when:
+    //  - `exited` switches to true
+    //  - component unmounts;
+    (0, _react.useEffect)(()=>{
+        if (!exited) return;
+        handleHide();
+    }, [
+        exited,
+        handleHide
+    ]);
+    (0, _useWillUnmountDefault.default)(()=>{
+        handleHide();
+    }); // --------------------------------
+    const handleEnforceFocus = (0, _useEventCallbackDefault.default)(()=>{
+        if (!enforceFocus || !isMounted() || !modal.isTopModal()) return;
+        const currentActiveElement = (0, _activeElementDefault.default)();
+        if (modal.dialog && currentActiveElement && !(0, _containsDefault.default)(modal.dialog, currentActiveElement)) modal.dialog.focus();
+    });
+    const handleBackdropClick = (0, _useEventCallbackDefault.default)((e)=>{
+        if (e.target !== e.currentTarget) return;
+        onBackdropClick == null || onBackdropClick(e);
+        if (backdrop === true) onHide();
+    });
+    const handleDocumentKeyDown = (0, _useEventCallbackDefault.default)((e)=>{
+        if (keyboard && e.keyCode === 27 && modal.isTopModal()) {
+            onEscapeKeyDown == null || onEscapeKeyDown(e);
+            if (!e.defaultPrevented) onHide();
+        }
+    });
+    const removeFocusListenerRef = (0, _react.useRef)();
+    const removeKeydownListenerRef = (0, _react.useRef)();
+    const handleHidden = (...args)=>{
+        setExited(true);
+        onExited == null || onExited(...args);
+    };
+    const Transition = transition;
+    if (!container || !(show || Transition && !exited)) return null;
+    const dialogProps = Object.assign({
+        role,
+        ref: modal.setDialogRef,
+        // apparently only works on the dialog role element
+        "aria-modal": role === "dialog" ? true : undefined
+    }, rest, {
+        style,
+        className,
+        tabIndex: -1
+    });
+    let dialog = renderDialog ? renderDialog(dialogProps) : /*#__PURE__*/ (0, _jsxRuntime.jsx)("div", Object.assign({}, dialogProps, {
+        children: /*#__PURE__*/ _react.cloneElement(children, {
+            role: "document"
+        })
+    }));
+    if (Transition) dialog = /*#__PURE__*/ (0, _jsxRuntime.jsx)(Transition, {
+        appear: true,
+        unmountOnExit: true,
+        in: !!show,
+        onExit: onExit,
+        onExiting: onExiting,
+        onExited: handleHidden,
+        onEnter: onEnter,
+        onEntering: onEntering,
+        onEntered: onEntered,
+        children: dialog
+    });
+    let backdropElement = null;
+    if (backdrop) {
+        const BackdropTransition = backdropTransition;
+        backdropElement = renderBackdrop({
+            ref: modal.setBackdropRef,
+            onClick: handleBackdropClick
+        });
+        if (BackdropTransition) backdropElement = /*#__PURE__*/ (0, _jsxRuntime.jsx)(BackdropTransition, {
+            appear: true,
+            in: !!show,
+            children: backdropElement
+        });
+    }
+    return /*#__PURE__*/ (0, _jsxRuntime.jsx)((0, _jsxRuntime.Fragment), {
+        children: /*#__PURE__*/ (0, _reactDomDefault.default).createPortal(/*#__PURE__*/ (0, _jsxRuntime.jsxs)((0, _jsxRuntime.Fragment), {
+            children: [
+                backdropElement,
+                dialog
+            ]
+        }), container)
+    });
+});
+Modal.displayName = "Modal";
+exports.default = Object.assign(Modal, {
+    Manager: (0, _modalManagerDefault.default)
+});
+
+},{"dom-helpers/activeElement":"5ShA6","dom-helpers/contains":"KpRFS","dom-helpers/canUseDOM":"9AwUB","dom-helpers/listen":"1i4e7","react":"21dqq","react-dom":"j6uA9","@restart/hooks/useMounted":"iK6A1","@restart/hooks/useWillUnmount":"2OOXI","@restart/hooks/usePrevious":"gDCGm","@restart/hooks/useEventCallback":"7ONdq","./ModalManager":"5alMm","./useWaitForDOMRef":"83lRQ","./useWindow":"4AsJ2","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5ShA6":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _ownerDocument = require("./ownerDocument");
+var _ownerDocumentDefault = parcelHelpers.interopDefault(_ownerDocument);
+function activeElement(doc) {
+    if (doc === void 0) doc = (0, _ownerDocumentDefault.default)();
+    // Support: IE 9 only
+    // IE9 throws an "Unspecified error" accessing document.activeElement from an <iframe>
+    try {
+        var active = doc.activeElement; // IE11 returns a seemingly empty object in some cases when accessing
+        // document.activeElement from an <iframe>
+        if (!active || !active.nodeName) return null;
+        return active;
+    } catch (e) {
+        /* ie throws if no active element */ return doc.body;
+    }
+}
+exports.default = activeElement;
+
+},{"./ownerDocument":"2WpOk","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"KpRFS":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+function contains(context, node) {
+    // HTML DOM and SVG DOM may have different support levels,
+    // so we need to check on context instead of a document root element.
+    if (context.contains) return context.contains(node);
+    if (context.compareDocumentPosition) return context === node || !!(context.compareDocumentPosition(node) & 16);
+}
+exports.default = contains;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iK6A1":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _react = require("react");
+function useMounted() {
+    var mounted = (0, _react.useRef)(true);
+    var isMounted = (0, _react.useRef)(function() {
+        return mounted.current;
+    });
+    (0, _react.useEffect)(function() {
+        mounted.current = true;
+        return function() {
+            mounted.current = false;
+        };
+    }, []);
+    return isMounted.current;
+}
+exports.default = useMounted;
+
+},{"react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gDCGm":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _react = require("react");
+function usePrevious(value) {
+    var ref = (0, _react.useRef)(null);
+    (0, _react.useEffect)(function() {
+        ref.current = value;
+    });
+    return ref.current;
+}
+exports.default = usePrevious;
+
+},{"react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5alMm":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "OPEN_DATA_ATTRIBUTE", ()=>OPEN_DATA_ATTRIBUTE);
+var _css = require("dom-helpers/css");
+var _cssDefault = parcelHelpers.interopDefault(_css);
+var _dataKey = require("./DataKey");
+var _getScrollbarWidth = require("./getScrollbarWidth");
+var _getScrollbarWidthDefault = parcelHelpers.interopDefault(_getScrollbarWidth);
+const OPEN_DATA_ATTRIBUTE = (0, _dataKey.dataAttr)("modal-open");
+/**
+ * Manages a stack of Modals as well as ensuring
+ * body scrolling is is disabled and padding accounted for
+ */ class ModalManager {
+    constructor({ ownerDocument , handleContainerOverflow =true , isRTL =false  } = {}){
+        this.handleContainerOverflow = handleContainerOverflow;
+        this.isRTL = isRTL;
+        this.modals = [];
+        this.ownerDocument = ownerDocument;
+    }
+    getScrollbarWidth() {
+        return (0, _getScrollbarWidthDefault.default)(this.ownerDocument);
+    }
+    getElement() {
+        return (this.ownerDocument || document).body;
+    }
+    setModalAttributes(_modal) {}
+    removeModalAttributes(_modal) {}
+    setContainerStyle(containerState) {
+        const style = {
+            overflow: "hidden"
+        }; // we are only interested in the actual `style` here
+        // because we will override it
+        const paddingProp = this.isRTL ? "paddingLeft" : "paddingRight";
+        const container = this.getElement();
+        containerState.style = {
+            overflow: container.style.overflow,
+            [paddingProp]: container.style[paddingProp]
+        };
+        if (containerState.scrollBarWidth) // use computed style, here to get the real padding
+        // to add our scrollbar width
+        style[paddingProp] = `${parseInt((0, _cssDefault.default)(container, paddingProp) || "0", 10) + containerState.scrollBarWidth}px`;
+        container.setAttribute(OPEN_DATA_ATTRIBUTE, "");
+        (0, _cssDefault.default)(container, style);
+    }
+    reset() {
+        [
+            ...this.modals
+        ].forEach((m)=>this.remove(m));
+    }
+    removeContainerStyle(containerState) {
+        const container = this.getElement();
+        container.removeAttribute(OPEN_DATA_ATTRIBUTE);
+        Object.assign(container.style, containerState.style);
+    }
+    add(modal) {
+        let modalIdx = this.modals.indexOf(modal);
+        if (modalIdx !== -1) return modalIdx;
+        modalIdx = this.modals.length;
+        this.modals.push(modal);
+        this.setModalAttributes(modal);
+        if (modalIdx !== 0) return modalIdx;
+        this.state = {
+            scrollBarWidth: this.getScrollbarWidth(),
+            style: {}
+        };
+        if (this.handleContainerOverflow) this.setContainerStyle(this.state);
+        return modalIdx;
+    }
+    remove(modal) {
+        const modalIdx = this.modals.indexOf(modal);
+        if (modalIdx === -1) return;
+        this.modals.splice(modalIdx, 1); // if that was the last modal in a container,
+        // clean up the container
+        if (!this.modals.length && this.handleContainerOverflow) this.removeContainerStyle(this.state);
+        this.removeModalAttributes(modal);
+    }
+    isTopModal(modal) {
+        return !!this.modals.length && this.modals[this.modals.length - 1] === modal;
+    }
+}
+exports.default = ModalManager;
+
+},{"dom-helpers/css":"klmhr","./DataKey":"9vwZh","./getScrollbarWidth":"9IxEN","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9vwZh":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ATTRIBUTE_PREFIX", ()=>ATTRIBUTE_PREFIX);
+parcelHelpers.export(exports, "PROPERTY_PREFIX", ()=>PROPERTY_PREFIX);
+parcelHelpers.export(exports, "dataAttr", ()=>dataAttr);
+parcelHelpers.export(exports, "dataProp", ()=>dataProp);
+const ATTRIBUTE_PREFIX = `data-rr-ui-`;
+const PROPERTY_PREFIX = `rrUi`;
+function dataAttr(property) {
+    return `${ATTRIBUTE_PREFIX}${property}`;
+}
+function dataProp(property) {
+    return `${PROPERTY_PREFIX}${property}`;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9IxEN":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+function getBodyScrollbarWidth(ownerDocument = document) {
+    const window = ownerDocument.defaultView;
+    return Math.abs(window.innerWidth - ownerDocument.documentElement.clientWidth);
+}
+exports.default = getBodyScrollbarWidth;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"83lRQ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "resolveContainerRef", ()=>resolveContainerRef);
+var _ownerDocument = require("dom-helpers/ownerDocument");
+var _ownerDocumentDefault = parcelHelpers.interopDefault(_ownerDocument);
+var _canUseDOM = require("dom-helpers/canUseDOM");
+var _canUseDOMDefault = parcelHelpers.interopDefault(_canUseDOM);
+var _react = require("react");
+var _useWindow = require("./useWindow");
+var _useWindowDefault = parcelHelpers.interopDefault(_useWindow);
+const resolveContainerRef = (ref, document)=>{
+    var _ref;
+    if (!(0, _canUseDOMDefault.default)) return null;
+    if (ref == null) return (document || (0, _ownerDocumentDefault.default)()).body;
+    if (typeof ref === "function") ref = ref();
+    if (ref && "current" in ref) ref = ref.current;
+    if ((_ref = ref) != null && _ref.nodeType) return ref || null;
+    return null;
+};
+function useWaitForDOMRef(ref, onResolved) {
+    const window = (0, _useWindowDefault.default)();
+    const [resolvedRef, setRef] = (0, _react.useState)(()=>resolveContainerRef(ref, window == null ? void 0 : window.document));
+    if (!resolvedRef) {
+        const earlyRef = resolveContainerRef(ref);
+        if (earlyRef) setRef(earlyRef);
+    }
+    (0, _react.useEffect)(()=>{
+        if (onResolved && resolvedRef) onResolved(resolvedRef);
+    }, [
+        onResolved,
+        resolvedRef
+    ]);
+    (0, _react.useEffect)(()=>{
+        const nextRef = resolveContainerRef(ref);
+        if (nextRef !== resolvedRef) setRef(nextRef);
+    }, [
+        ref,
+        resolvedRef
+    ]);
+    return resolvedRef;
+}
+exports.default = useWaitForDOMRef;
+
+},{"dom-helpers/ownerDocument":"2WpOk","dom-helpers/canUseDOM":"9AwUB","react":"21dqq","./useWindow":"4AsJ2","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4AsJ2":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "WindowProvider", ()=>WindowProvider);
+var _react = require("react");
+var _canUseDOM = require("dom-helpers/canUseDOM");
+var _canUseDOMDefault = parcelHelpers.interopDefault(_canUseDOM);
+const Context = /*#__PURE__*/ (0, _react.createContext)((0, _canUseDOMDefault.default) ? window : undefined);
+const WindowProvider = Context.Provider;
+function useWindow() {
+    return (0, _react.useContext)(Context);
+}
+exports.default = useWindow;
+
+},{"react":"21dqq","dom-helpers/canUseDOM":"9AwUB","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lr1Yp":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "getSharedManager", ()=>getSharedManager);
+var _addClass = require("dom-helpers/addClass");
+var _addClassDefault = parcelHelpers.interopDefault(_addClass);
+var _css = require("dom-helpers/css");
+var _cssDefault = parcelHelpers.interopDefault(_css);
+var _querySelectorAll = require("dom-helpers/querySelectorAll");
+var _querySelectorAllDefault = parcelHelpers.interopDefault(_querySelectorAll);
+var _removeClass = require("dom-helpers/removeClass");
+var _removeClassDefault = parcelHelpers.interopDefault(_removeClass);
+var _modalManager = require("@restart/ui/ModalManager");
+var _modalManagerDefault = parcelHelpers.interopDefault(_modalManager);
+const Selector = {
+    FIXED_CONTENT: ".fixed-top, .fixed-bottom, .is-fixed, .sticky-top",
+    STICKY_CONTENT: ".sticky-top",
+    NAVBAR_TOGGLER: ".navbar-toggler"
+};
+class BootstrapModalManager extends (0, _modalManagerDefault.default) {
+    adjustAndStore(prop, element, adjust) {
+        const actual = element.style[prop]; // TODO: DOMStringMap and CSSStyleDeclaration aren't strictly compatible
+        // @ts-ignore
+        element.dataset[prop] = actual;
+        (0, _cssDefault.default)(element, {
+            [prop]: `${parseFloat((0, _cssDefault.default)(element, prop)) + adjust}px`
+        });
+    }
+    restore(prop, element) {
+        const value = element.dataset[prop];
+        if (value !== undefined) {
+            delete element.dataset[prop];
+            (0, _cssDefault.default)(element, {
+                [prop]: value
+            });
+        }
+    }
+    setContainerStyle(containerState) {
+        super.setContainerStyle(containerState);
+        const container = this.getElement();
+        (0, _addClassDefault.default)(container, "modal-open");
+        if (!containerState.scrollBarWidth) return;
+        const paddingProp = this.isRTL ? "paddingLeft" : "paddingRight";
+        const marginProp = this.isRTL ? "marginLeft" : "marginRight";
+        (0, _querySelectorAllDefault.default)(container, Selector.FIXED_CONTENT).forEach((el)=>this.adjustAndStore(paddingProp, el, containerState.scrollBarWidth));
+        (0, _querySelectorAllDefault.default)(container, Selector.STICKY_CONTENT).forEach((el)=>this.adjustAndStore(marginProp, el, -containerState.scrollBarWidth));
+        (0, _querySelectorAllDefault.default)(container, Selector.NAVBAR_TOGGLER).forEach((el)=>this.adjustAndStore(marginProp, el, containerState.scrollBarWidth));
+    }
+    removeContainerStyle(containerState) {
+        super.removeContainerStyle(containerState);
+        const container = this.getElement();
+        (0, _removeClassDefault.default)(container, "modal-open");
+        const paddingProp = this.isRTL ? "paddingLeft" : "paddingRight";
+        const marginProp = this.isRTL ? "marginLeft" : "marginRight";
+        (0, _querySelectorAllDefault.default)(container, Selector.FIXED_CONTENT).forEach((el)=>this.restore(paddingProp, el));
+        (0, _querySelectorAllDefault.default)(container, Selector.STICKY_CONTENT).forEach((el)=>this.restore(marginProp, el));
+        (0, _querySelectorAllDefault.default)(container, Selector.NAVBAR_TOGGLER).forEach((el)=>this.restore(marginProp, el));
+    }
+}
+let sharedManager;
+function getSharedManager(options) {
+    if (!sharedManager) sharedManager = new BootstrapModalManager(options);
+    return sharedManager;
+}
+exports.default = BootstrapModalManager;
+
+},{"dom-helpers/addClass":"7dIIz","dom-helpers/css":"klmhr","dom-helpers/querySelectorAll":"g5Sx6","dom-helpers/removeClass":"66hgg","@restart/ui/ModalManager":"5alMm","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7dIIz":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _hasClass = require("./hasClass");
+var _hasClassDefault = parcelHelpers.interopDefault(_hasClass);
+function addClass(element, className) {
+    if (element.classList) element.classList.add(className);
+    else if (!(0, _hasClassDefault.default)(element, className)) {
+        if (typeof element.className === "string") element.className = element.className + " " + className;
+        else element.setAttribute("class", (element.className && element.className.baseVal || "") + " " + className);
+    }
+}
+exports.default = addClass;
+
+},{"./hasClass":"6sJz4","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6sJz4":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+function hasClass(element, className) {
+    if (element.classList) return !!className && element.classList.contains(className);
+    return (" " + (element.className.baseVal || element.className) + " ").indexOf(" " + className + " ") !== -1;
+}
+exports.default = hasClass;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"g5Sx6":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var toArray = Function.prototype.bind.call(Function.prototype.call, [].slice);
+function qsa(element, selector) {
+    return toArray(element.querySelectorAll(selector));
+}
+exports.default = qsa;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"66hgg":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+function replaceClassName(origClass, classToRemove) {
+    return origClass.replace(new RegExp("(^|\\s)" + classToRemove + "(?:\\s|$)", "g"), "$1").replace(/\s+/g, " ").replace(/^\s*|\s*$/g, "");
+}
+function removeClass(element, className) {
+    if (element.classList) element.classList.remove(className);
+    else if (typeof element.className === "string") element.className = replaceClassName(element.className, className);
+    else element.setAttribute("class", replaceClassName(element.className && element.className.baseVal || "", className));
+}
+exports.default = removeClass;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"e0aNG":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _createWithBsPrefix = require("./createWithBsPrefix");
+var _createWithBsPrefixDefault = parcelHelpers.interopDefault(_createWithBsPrefix);
+exports.default = (0, _createWithBsPrefixDefault.default)("modal-body");
+
+},{"./createWithBsPrefix":"itt7e","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2U4Zk":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _react = require("react");
+const ModalContext = /*#__PURE__*/ _react.createContext({
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    onHide () {}
+});
+exports.default = ModalContext;
+
+},{"react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cwGGq":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _classnames = require("classnames");
+var _classnamesDefault = parcelHelpers.interopDefault(_classnames);
+var _react = require("react");
+var _themeProvider = require("./ThemeProvider");
+var _jsxRuntime = require("react/jsx-runtime");
+const ModalDialog = /*#__PURE__*/ _react.forwardRef(({ bsPrefix , className , contentClassName , centered , size , fullscreen , children , scrollable , ...props }, ref)=>{
+    bsPrefix = (0, _themeProvider.useBootstrapPrefix)(bsPrefix, "modal");
+    const dialogClass = `${bsPrefix}-dialog`;
+    const fullScreenClass = typeof fullscreen === "string" ? `${bsPrefix}-fullscreen-${fullscreen}` : `${bsPrefix}-fullscreen`;
+    return /*#__PURE__*/ (0, _jsxRuntime.jsx)("div", {
+        ...props,
+        ref: ref,
+        className: (0, _classnamesDefault.default)(dialogClass, className, size && `${bsPrefix}-${size}`, centered && `${dialogClass}-centered`, scrollable && `${dialogClass}-scrollable`, fullscreen && fullScreenClass),
+        children: /*#__PURE__*/ (0, _jsxRuntime.jsx)("div", {
+            className: (0, _classnamesDefault.default)(`${bsPrefix}-content`, contentClassName),
+            children: children
+        })
+    });
+});
+ModalDialog.displayName = "ModalDialog";
+exports.default = ModalDialog;
+
+},{"classnames":"jocGM","react":"21dqq","./ThemeProvider":"dVixI","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9SLlP":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _createWithBsPrefix = require("./createWithBsPrefix");
+var _createWithBsPrefixDefault = parcelHelpers.interopDefault(_createWithBsPrefix);
+exports.default = (0, _createWithBsPrefixDefault.default)("modal-footer");
+
+},{"./createWithBsPrefix":"itt7e","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cxgdE":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _classnames = require("classnames");
+var _classnamesDefault = parcelHelpers.interopDefault(_classnames);
+var _react = require("react");
+var _themeProvider = require("./ThemeProvider");
+var _abstractModalHeader = require("./AbstractModalHeader");
+var _abstractModalHeaderDefault = parcelHelpers.interopDefault(_abstractModalHeader);
+var _jsxRuntime = require("react/jsx-runtime");
+const defaultProps = {
+    closeLabel: "Close",
+    closeButton: false
+};
+const ModalHeader = /*#__PURE__*/ _react.forwardRef(({ bsPrefix , className , ...props }, ref)=>{
+    bsPrefix = (0, _themeProvider.useBootstrapPrefix)(bsPrefix, "modal-header");
+    return /*#__PURE__*/ (0, _jsxRuntime.jsx)((0, _abstractModalHeaderDefault.default), {
+        ref: ref,
+        ...props,
+        className: (0, _classnamesDefault.default)(className, bsPrefix)
+    });
+});
+ModalHeader.displayName = "ModalHeader";
+ModalHeader.defaultProps = defaultProps;
+exports.default = ModalHeader;
+
+},{"classnames":"jocGM","react":"21dqq","./ThemeProvider":"dVixI","./AbstractModalHeader":"hPF8S","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hPF8S":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _react = require("react");
+var _useEventCallback = require("@restart/hooks/useEventCallback");
+var _useEventCallbackDefault = parcelHelpers.interopDefault(_useEventCallback);
+var _closeButton = require("./CloseButton");
+var _closeButtonDefault = parcelHelpers.interopDefault(_closeButton);
+var _modalContext = require("./ModalContext");
+var _modalContextDefault = parcelHelpers.interopDefault(_modalContext);
+var _jsxRuntime = require("react/jsx-runtime");
+const defaultProps = {
+    closeLabel: "Close",
+    closeButton: false
+};
+const AbstractModalHeader = /*#__PURE__*/ _react.forwardRef(({ closeLabel , closeVariant , closeButton , onHide , children , ...props }, ref)=>{
+    const context = (0, _react.useContext)((0, _modalContextDefault.default));
+    const handleClick = (0, _useEventCallbackDefault.default)(()=>{
+        context == null || context.onHide();
+        onHide == null || onHide();
+    });
+    return /*#__PURE__*/ (0, _jsxRuntime.jsxs)("div", {
+        ref: ref,
+        ...props,
+        children: [
+            children,
+            closeButton && /*#__PURE__*/ (0, _jsxRuntime.jsx)((0, _closeButtonDefault.default), {
+                "aria-label": closeLabel,
+                variant: closeVariant,
+                onClick: handleClick
+            })
+        ]
+    });
+});
+AbstractModalHeader.defaultProps = defaultProps;
+exports.default = AbstractModalHeader;
+
+},{"react":"21dqq","@restart/hooks/useEventCallback":"7ONdq","./CloseButton":"1wmVl","./ModalContext":"2U4Zk","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kYqJp":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _createWithBsPrefix = require("./createWithBsPrefix");
+var _createWithBsPrefixDefault = parcelHelpers.interopDefault(_createWithBsPrefix);
+var _divWithClassName = require("./divWithClassName");
+var _divWithClassNameDefault = parcelHelpers.interopDefault(_divWithClassName);
+const DivStyledAsH4 = (0, _divWithClassNameDefault.default)("h4");
+exports.default = (0, _createWithBsPrefixDefault.default)("modal-title", {
+    Component: DivStyledAsH4
+});
+
+},{"./createWithBsPrefix":"itt7e","./divWithClassName":"eDg7t","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cXyL2":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _classnames = require("classnames");
@@ -37514,16 +38581,7 @@ exports.default = Object.assign(Nav, {
     Item: (0, _navItemDefault.default)
 });
 
-},{"dom-helpers/querySelectorAll":"g5Sx6","react":"21dqq","@restart/hooks/useForceUpdate":"3Y4bz","@restart/hooks/useMergedRefs":"6hhuo","./NavContext":"j1SMA","./SelectableContext":"8zLqy","./TabContext":"cI3G3","./DataKey":"9vwZh","./NavItem":"2cGYS","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"g5Sx6":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var toArray = Function.prototype.bind.call(Function.prototype.call, [].slice);
-function qsa(element, selector) {
-    return toArray(element.querySelectorAll(selector));
-}
-exports.default = qsa;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3Y4bz":[function(require,module,exports) {
+},{"dom-helpers/querySelectorAll":"g5Sx6","react":"21dqq","@restart/hooks/useForceUpdate":"3Y4bz","@restart/hooks/useMergedRefs":"6hhuo","./NavContext":"j1SMA","./SelectableContext":"8zLqy","./TabContext":"cI3G3","./DataKey":"9vwZh","./NavItem":"2cGYS","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3Y4bz":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _react = require("react");
@@ -37564,23 +38622,7 @@ var _react = require("react");
 const TabContext = /*#__PURE__*/ _react.createContext(null);
 exports.default = TabContext;
 
-},{"react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9vwZh":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "ATTRIBUTE_PREFIX", ()=>ATTRIBUTE_PREFIX);
-parcelHelpers.export(exports, "PROPERTY_PREFIX", ()=>PROPERTY_PREFIX);
-parcelHelpers.export(exports, "dataAttr", ()=>dataAttr);
-parcelHelpers.export(exports, "dataProp", ()=>dataProp);
-const ATTRIBUTE_PREFIX = `data-rr-ui-`;
-const PROPERTY_PREFIX = `rrUi`;
-function dataAttr(property) {
-    return `${ATTRIBUTE_PREFIX}${property}`;
-}
-function dataProp(property) {
-    return `${PROPERTY_PREFIX}${property}`;
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2cGYS":[function(require,module,exports) {
+},{"react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2cGYS":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "useNavItem", ()=>useNavItem);
@@ -37674,46 +38716,7 @@ const NavItem = /*#__PURE__*/ _react.forwardRef((_ref, ref)=>{
 NavItem.displayName = "NavItem";
 exports.default = NavItem;
 
-},{"react":"21dqq","@restart/hooks/useEventCallback":"7ONdq","./NavContext":"j1SMA","./SelectableContext":"8zLqy","./Button":"8YUbR","./DataKey":"9vwZh","./TabContext":"cI3G3","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7ONdq":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _react = require("react");
-var _useCommittedRef = require("./useCommittedRef");
-var _useCommittedRefDefault = parcelHelpers.interopDefault(_useCommittedRef);
-function useEventCallback(fn) {
-    var ref = (0, _useCommittedRefDefault.default)(fn);
-    return (0, _react.useCallback)(function() {
-        return ref.current && ref.current.apply(ref, arguments);
-    }, [
-        ref
-    ]);
-}
-exports.default = useEventCallback;
-
-},{"react":"21dqq","./useCommittedRef":"g5BYG","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"g5BYG":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _react = require("react");
-/**
- * Creates a `Ref` whose value is updated in an effect, ensuring the most recent
- * value is the one rendered with. Generally only required for Concurrent mode usage
- * where previous work in `render()` may be discarded before being used.
- *
- * This is safe to access in an event handler.
- *
- * @param value The `Ref` value
- */ function useCommittedRef(value) {
-    var ref = (0, _react.useRef)(value);
-    (0, _react.useEffect)(function() {
-        ref.current = value;
-    }, [
-        value
-    ]);
-    return ref;
-}
-exports.default = useCommittedRef;
-
-},{"react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dpn1g":[function(require,module,exports) {
+},{"react":"21dqq","@restart/hooks/useEventCallback":"7ONdq","./NavContext":"j1SMA","./SelectableContext":"8zLqy","./Button":"8YUbR","./DataKey":"9vwZh","./TabContext":"cI3G3","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dpn1g":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _react = require("react"); // TODO: check
@@ -37856,16 +38859,7 @@ var _useImageDefault = parcelHelpers.interopDefault(_useImage);
 var _useResizeObserver = require("./useResizeObserver");
 var _useResizeObserverDefault = parcelHelpers.interopDefault(_useResizeObserver);
 
-},{"./useCallbackRef":"82p6M","./useCommittedRef":"g5BYG","./useEventCallback":"7ONdq","./useEventListener":"dBDI3","./useGlobalListener":"iey73","./useInterval":"hnmo4","./useRafInterval":"4qbLw","./useMergeState":"7E8IK","./useMergeStateFromProps":"6f6Me","./useMounted":"iK6A1","./usePrevious":"gDCGm","./useImage":"iuAlv","./useResizeObserver":"edwGv","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"82p6M":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _react = require("react");
-function useCallbackRef() {
-    return (0, _react.useState)(null);
-}
-exports.default = useCallbackRef;
-
-},{"react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dBDI3":[function(require,module,exports) {
+},{"./useCallbackRef":"82p6M","./useCommittedRef":"g5BYG","./useEventCallback":"7ONdq","./useEventListener":"dBDI3","./useGlobalListener":"iey73","./useInterval":"hnmo4","./useRafInterval":"4qbLw","./useMergeState":"7E8IK","./useMergeStateFromProps":"6f6Me","./useMounted":"iK6A1","./usePrevious":"gDCGm","./useImage":"iuAlv","./useResizeObserver":"edwGv","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dBDI3":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _react = require("react");
@@ -38034,39 +39028,7 @@ function useMergeStateFromProps(props, gDSFP, initialState) {
 }
 exports.default = useMergeStateFromProps;
 
-},{"./useMergeState":"7E8IK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iK6A1":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _react = require("react");
-function useMounted() {
-    var mounted = (0, _react.useRef)(true);
-    var isMounted = (0, _react.useRef)(function() {
-        return mounted.current;
-    });
-    (0, _react.useEffect)(function() {
-        mounted.current = true;
-        return function() {
-            mounted.current = false;
-        };
-    }, []);
-    return isMounted.current;
-}
-exports.default = useMounted;
-
-},{"react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gDCGm":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _react = require("react");
-function usePrevious(value) {
-    var ref = (0, _react.useRef)(null);
-    (0, _react.useEffect)(function() {
-        ref.current = value;
-    });
-    return ref.current;
-}
-exports.default = usePrevious;
-
-},{"react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iuAlv":[function(require,module,exports) {
+},{"./useMergeState":"7E8IK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iuAlv":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _react = require("react");
@@ -38669,452 +39631,7 @@ exports.default = Object.assign(Offcanvas, {
     Title: (0, _offcanvasTitleDefault.default)
 });
 
-},{"classnames":"jocGM","@restart/hooks/useEventCallback":"7ONdq","react":"21dqq","@restart/ui/Modal":"crj1M","./Fade":"aH18S","./OffcanvasBody":"fX7Bo","./OffcanvasToggling":"eGvzt","./ModalContext":"2U4Zk","./NavbarContext":"dpn1g","./OffcanvasHeader":"a6xAh","./OffcanvasTitle":"77qdX","./ThemeProvider":"dVixI","./BootstrapModalManager":"lr1Yp","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"crj1M":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-/* eslint-disable @typescript-eslint/no-use-before-define, react/prop-types */ var _activeElement = require("dom-helpers/activeElement");
-var _activeElementDefault = parcelHelpers.interopDefault(_activeElement);
-var _contains = require("dom-helpers/contains");
-var _containsDefault = parcelHelpers.interopDefault(_contains);
-var _canUseDOM = require("dom-helpers/canUseDOM");
-var _canUseDOMDefault = parcelHelpers.interopDefault(_canUseDOM);
-var _listen = require("dom-helpers/listen");
-var _listenDefault = parcelHelpers.interopDefault(_listen);
-var _react = require("react");
-var _reactDom = require("react-dom");
-var _reactDomDefault = parcelHelpers.interopDefault(_reactDom);
-var _useMounted = require("@restart/hooks/useMounted");
-var _useMountedDefault = parcelHelpers.interopDefault(_useMounted);
-var _useWillUnmount = require("@restart/hooks/useWillUnmount");
-var _useWillUnmountDefault = parcelHelpers.interopDefault(_useWillUnmount);
-var _usePrevious = require("@restart/hooks/usePrevious");
-var _usePreviousDefault = parcelHelpers.interopDefault(_usePrevious);
-var _useEventCallback = require("@restart/hooks/useEventCallback");
-var _useEventCallbackDefault = parcelHelpers.interopDefault(_useEventCallback);
-var _modalManager = require("./ModalManager");
-var _modalManagerDefault = parcelHelpers.interopDefault(_modalManager);
-var _useWaitForDOMRef = require("./useWaitForDOMRef");
-var _useWaitForDOMRefDefault = parcelHelpers.interopDefault(_useWaitForDOMRef);
-var _useWindow = require("./useWindow");
-var _useWindowDefault = parcelHelpers.interopDefault(_useWindow);
-var _jsxRuntime = require("react/jsx-runtime");
-const _excluded = [
-    "show",
-    "role",
-    "className",
-    "style",
-    "children",
-    "backdrop",
-    "keyboard",
-    "onBackdropClick",
-    "onEscapeKeyDown",
-    "transition",
-    "backdropTransition",
-    "autoFocus",
-    "enforceFocus",
-    "restoreFocus",
-    "restoreFocusOptions",
-    "renderDialog",
-    "renderBackdrop",
-    "manager",
-    "container",
-    "onShow",
-    "onHide",
-    "onExit",
-    "onExited",
-    "onExiting",
-    "onEnter",
-    "onEntering",
-    "onEntered"
-];
-function _objectWithoutPropertiesLoose(source, excluded) {
-    if (source == null) return {};
-    var target = {};
-    var sourceKeys = Object.keys(source);
-    var key, i;
-    for(i = 0; i < sourceKeys.length; i++){
-        key = sourceKeys[i];
-        if (excluded.indexOf(key) >= 0) continue;
-        target[key] = source[key];
-    }
-    return target;
-}
-let manager;
-function getManager(window) {
-    if (!manager) manager = new (0, _modalManagerDefault.default)({
-        ownerDocument: window == null ? void 0 : window.document
-    });
-    return manager;
-}
-function useModalManager(provided) {
-    const window = (0, _useWindowDefault.default)();
-    const modalManager = provided || getManager(window);
-    const modal = (0, _react.useRef)({
-        dialog: null,
-        backdrop: null
-    });
-    return Object.assign(modal.current, {
-        add: ()=>modalManager.add(modal.current),
-        remove: ()=>modalManager.remove(modal.current),
-        isTopModal: ()=>modalManager.isTopModal(modal.current),
-        setDialogRef: (0, _react.useCallback)((ref)=>{
-            modal.current.dialog = ref;
-        }, []),
-        setBackdropRef: (0, _react.useCallback)((ref)=>{
-            modal.current.backdrop = ref;
-        }, [])
-    });
-}
-const Modal = /*#__PURE__*/ (0, _react.forwardRef)((_ref, ref)=>{
-    let { show =false , role ="dialog" , className , style , children , backdrop =true , keyboard =true , onBackdropClick , onEscapeKeyDown , transition , backdropTransition , autoFocus =true , enforceFocus =true , restoreFocus =true , restoreFocusOptions , renderDialog , renderBackdrop =(props)=>/*#__PURE__*/ (0, _jsxRuntime.jsx)("div", Object.assign({}, props)) , manager: providedManager , container: containerRef , onShow , onHide =()=>{} , onExit , onExited , onExiting , onEnter , onEntering , onEntered  } = _ref, rest = _objectWithoutPropertiesLoose(_ref, _excluded);
-    const container = (0, _useWaitForDOMRefDefault.default)(containerRef);
-    const modal = useModalManager(providedManager);
-    const isMounted = (0, _useMountedDefault.default)();
-    const prevShow = (0, _usePreviousDefault.default)(show);
-    const [exited, setExited] = (0, _react.useState)(!show);
-    const lastFocusRef = (0, _react.useRef)(null);
-    (0, _react.useImperativeHandle)(ref, ()=>modal, [
-        modal
-    ]);
-    if ((0, _canUseDOMDefault.default) && !prevShow && show) lastFocusRef.current = (0, _activeElementDefault.default)();
-    if (!transition && !show && !exited) setExited(true);
-    else if (show && exited) setExited(false);
-    const handleShow = (0, _useEventCallbackDefault.default)(()=>{
-        modal.add();
-        removeKeydownListenerRef.current = (0, _listenDefault.default)(document, "keydown", handleDocumentKeyDown);
-        removeFocusListenerRef.current = (0, _listenDefault.default)(document, "focus", // and so steals focus from it
-        ()=>setTimeout(handleEnforceFocus), true);
-        if (onShow) onShow();
-         // autofocus after onShow to not trigger a focus event for previous
-        // modals before this one is shown.
-        if (autoFocus) {
-            const currentActiveElement = (0, _activeElementDefault.default)(document);
-            if (modal.dialog && currentActiveElement && !(0, _containsDefault.default)(modal.dialog, currentActiveElement)) {
-                lastFocusRef.current = currentActiveElement;
-                modal.dialog.focus();
-            }
-        }
-    });
-    const handleHide = (0, _useEventCallbackDefault.default)(()=>{
-        modal.remove();
-        removeKeydownListenerRef.current == null || removeKeydownListenerRef.current();
-        removeFocusListenerRef.current == null || removeFocusListenerRef.current();
-        if (restoreFocus) {
-            var _lastFocusRef$current;
-            // Support: <=IE11 doesn't support `focus()` on svg elements (RB: #917)
-            (_lastFocusRef$current = lastFocusRef.current) == null || _lastFocusRef$current.focus == null || _lastFocusRef$current.focus(restoreFocusOptions);
-            lastFocusRef.current = null;
-        }
-    }); // TODO: try and combine these effects: https://github.com/react-bootstrap/react-overlays/pull/794#discussion_r409954120
-    // Show logic when:
-    //  - show is `true` _and_ `container` has resolved
-    (0, _react.useEffect)(()=>{
-        if (!show || !container) return;
-        handleShow();
-    }, [
-        show,
-        container,
-        /* should never change: */ handleShow
-    ]); // Hide cleanup logic when:
-    //  - `exited` switches to true
-    //  - component unmounts;
-    (0, _react.useEffect)(()=>{
-        if (!exited) return;
-        handleHide();
-    }, [
-        exited,
-        handleHide
-    ]);
-    (0, _useWillUnmountDefault.default)(()=>{
-        handleHide();
-    }); // --------------------------------
-    const handleEnforceFocus = (0, _useEventCallbackDefault.default)(()=>{
-        if (!enforceFocus || !isMounted() || !modal.isTopModal()) return;
-        const currentActiveElement = (0, _activeElementDefault.default)();
-        if (modal.dialog && currentActiveElement && !(0, _containsDefault.default)(modal.dialog, currentActiveElement)) modal.dialog.focus();
-    });
-    const handleBackdropClick = (0, _useEventCallbackDefault.default)((e)=>{
-        if (e.target !== e.currentTarget) return;
-        onBackdropClick == null || onBackdropClick(e);
-        if (backdrop === true) onHide();
-    });
-    const handleDocumentKeyDown = (0, _useEventCallbackDefault.default)((e)=>{
-        if (keyboard && e.keyCode === 27 && modal.isTopModal()) {
-            onEscapeKeyDown == null || onEscapeKeyDown(e);
-            if (!e.defaultPrevented) onHide();
-        }
-    });
-    const removeFocusListenerRef = (0, _react.useRef)();
-    const removeKeydownListenerRef = (0, _react.useRef)();
-    const handleHidden = (...args)=>{
-        setExited(true);
-        onExited == null || onExited(...args);
-    };
-    const Transition = transition;
-    if (!container || !(show || Transition && !exited)) return null;
-    const dialogProps = Object.assign({
-        role,
-        ref: modal.setDialogRef,
-        // apparently only works on the dialog role element
-        "aria-modal": role === "dialog" ? true : undefined
-    }, rest, {
-        style,
-        className,
-        tabIndex: -1
-    });
-    let dialog = renderDialog ? renderDialog(dialogProps) : /*#__PURE__*/ (0, _jsxRuntime.jsx)("div", Object.assign({}, dialogProps, {
-        children: /*#__PURE__*/ _react.cloneElement(children, {
-            role: "document"
-        })
-    }));
-    if (Transition) dialog = /*#__PURE__*/ (0, _jsxRuntime.jsx)(Transition, {
-        appear: true,
-        unmountOnExit: true,
-        in: !!show,
-        onExit: onExit,
-        onExiting: onExiting,
-        onExited: handleHidden,
-        onEnter: onEnter,
-        onEntering: onEntering,
-        onEntered: onEntered,
-        children: dialog
-    });
-    let backdropElement = null;
-    if (backdrop) {
-        const BackdropTransition = backdropTransition;
-        backdropElement = renderBackdrop({
-            ref: modal.setBackdropRef,
-            onClick: handleBackdropClick
-        });
-        if (BackdropTransition) backdropElement = /*#__PURE__*/ (0, _jsxRuntime.jsx)(BackdropTransition, {
-            appear: true,
-            in: !!show,
-            children: backdropElement
-        });
-    }
-    return /*#__PURE__*/ (0, _jsxRuntime.jsx)((0, _jsxRuntime.Fragment), {
-        children: /*#__PURE__*/ (0, _reactDomDefault.default).createPortal(/*#__PURE__*/ (0, _jsxRuntime.jsxs)((0, _jsxRuntime.Fragment), {
-            children: [
-                backdropElement,
-                dialog
-            ]
-        }), container)
-    });
-});
-Modal.displayName = "Modal";
-exports.default = Object.assign(Modal, {
-    Manager: (0, _modalManagerDefault.default)
-});
-
-},{"dom-helpers/activeElement":"5ShA6","dom-helpers/contains":"KpRFS","dom-helpers/canUseDOM":"9AwUB","dom-helpers/listen":"1i4e7","react":"21dqq","react-dom":"j6uA9","@restart/hooks/useMounted":"iK6A1","@restart/hooks/useWillUnmount":"2OOXI","@restart/hooks/usePrevious":"gDCGm","@restart/hooks/useEventCallback":"7ONdq","./ModalManager":"5alMm","./useWaitForDOMRef":"83lRQ","./useWindow":"4AsJ2","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5ShA6":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _ownerDocument = require("./ownerDocument");
-var _ownerDocumentDefault = parcelHelpers.interopDefault(_ownerDocument);
-function activeElement(doc) {
-    if (doc === void 0) doc = (0, _ownerDocumentDefault.default)();
-    // Support: IE 9 only
-    // IE9 throws an "Unspecified error" accessing document.activeElement from an <iframe>
-    try {
-        var active = doc.activeElement; // IE11 returns a seemingly empty object in some cases when accessing
-        // document.activeElement from an <iframe>
-        if (!active || !active.nodeName) return null;
-        return active;
-    } catch (e) {
-        /* ie throws if no active element */ return doc.body;
-    }
-}
-exports.default = activeElement;
-
-},{"./ownerDocument":"2WpOk","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"KpRFS":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-function contains(context, node) {
-    // HTML DOM and SVG DOM may have different support levels,
-    // so we need to check on context instead of a document root element.
-    if (context.contains) return context.contains(node);
-    if (context.compareDocumentPosition) return context === node || !!(context.compareDocumentPosition(node) & 16);
-}
-exports.default = contains;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2OOXI":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _useUpdatedRef = require("./useUpdatedRef");
-var _useUpdatedRefDefault = parcelHelpers.interopDefault(_useUpdatedRef);
-var _react = require("react");
-function useWillUnmount(fn) {
-    var onUnmount = (0, _useUpdatedRefDefault.default)(fn);
-    (0, _react.useEffect)(function() {
-        return function() {
-            return onUnmount.current();
-        };
-    }, []);
-}
-exports.default = useWillUnmount;
-
-},{"./useUpdatedRef":"cfaLu","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cfaLu":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _react = require("react");
-function useUpdatedRef(value) {
-    var valueRef = (0, _react.useRef)(value);
-    valueRef.current = value;
-    return valueRef;
-}
-exports.default = useUpdatedRef;
-
-},{"react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5alMm":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "OPEN_DATA_ATTRIBUTE", ()=>OPEN_DATA_ATTRIBUTE);
-var _css = require("dom-helpers/css");
-var _cssDefault = parcelHelpers.interopDefault(_css);
-var _dataKey = require("./DataKey");
-var _getScrollbarWidth = require("./getScrollbarWidth");
-var _getScrollbarWidthDefault = parcelHelpers.interopDefault(_getScrollbarWidth);
-const OPEN_DATA_ATTRIBUTE = (0, _dataKey.dataAttr)("modal-open");
-/**
- * Manages a stack of Modals as well as ensuring
- * body scrolling is is disabled and padding accounted for
- */ class ModalManager {
-    constructor({ ownerDocument , handleContainerOverflow =true , isRTL =false  } = {}){
-        this.handleContainerOverflow = handleContainerOverflow;
-        this.isRTL = isRTL;
-        this.modals = [];
-        this.ownerDocument = ownerDocument;
-    }
-    getScrollbarWidth() {
-        return (0, _getScrollbarWidthDefault.default)(this.ownerDocument);
-    }
-    getElement() {
-        return (this.ownerDocument || document).body;
-    }
-    setModalAttributes(_modal) {}
-    removeModalAttributes(_modal) {}
-    setContainerStyle(containerState) {
-        const style = {
-            overflow: "hidden"
-        }; // we are only interested in the actual `style` here
-        // because we will override it
-        const paddingProp = this.isRTL ? "paddingLeft" : "paddingRight";
-        const container = this.getElement();
-        containerState.style = {
-            overflow: container.style.overflow,
-            [paddingProp]: container.style[paddingProp]
-        };
-        if (containerState.scrollBarWidth) // use computed style, here to get the real padding
-        // to add our scrollbar width
-        style[paddingProp] = `${parseInt((0, _cssDefault.default)(container, paddingProp) || "0", 10) + containerState.scrollBarWidth}px`;
-        container.setAttribute(OPEN_DATA_ATTRIBUTE, "");
-        (0, _cssDefault.default)(container, style);
-    }
-    reset() {
-        [
-            ...this.modals
-        ].forEach((m)=>this.remove(m));
-    }
-    removeContainerStyle(containerState) {
-        const container = this.getElement();
-        container.removeAttribute(OPEN_DATA_ATTRIBUTE);
-        Object.assign(container.style, containerState.style);
-    }
-    add(modal) {
-        let modalIdx = this.modals.indexOf(modal);
-        if (modalIdx !== -1) return modalIdx;
-        modalIdx = this.modals.length;
-        this.modals.push(modal);
-        this.setModalAttributes(modal);
-        if (modalIdx !== 0) return modalIdx;
-        this.state = {
-            scrollBarWidth: this.getScrollbarWidth(),
-            style: {}
-        };
-        if (this.handleContainerOverflow) this.setContainerStyle(this.state);
-        return modalIdx;
-    }
-    remove(modal) {
-        const modalIdx = this.modals.indexOf(modal);
-        if (modalIdx === -1) return;
-        this.modals.splice(modalIdx, 1); // if that was the last modal in a container,
-        // clean up the container
-        if (!this.modals.length && this.handleContainerOverflow) this.removeContainerStyle(this.state);
-        this.removeModalAttributes(modal);
-    }
-    isTopModal(modal) {
-        return !!this.modals.length && this.modals[this.modals.length - 1] === modal;
-    }
-}
-exports.default = ModalManager;
-
-},{"dom-helpers/css":"klmhr","./DataKey":"9vwZh","./getScrollbarWidth":"9IxEN","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9IxEN":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-function getBodyScrollbarWidth(ownerDocument = document) {
-    const window = ownerDocument.defaultView;
-    return Math.abs(window.innerWidth - ownerDocument.documentElement.clientWidth);
-}
-exports.default = getBodyScrollbarWidth;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"83lRQ":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "resolveContainerRef", ()=>resolveContainerRef);
-var _ownerDocument = require("dom-helpers/ownerDocument");
-var _ownerDocumentDefault = parcelHelpers.interopDefault(_ownerDocument);
-var _canUseDOM = require("dom-helpers/canUseDOM");
-var _canUseDOMDefault = parcelHelpers.interopDefault(_canUseDOM);
-var _react = require("react");
-var _useWindow = require("./useWindow");
-var _useWindowDefault = parcelHelpers.interopDefault(_useWindow);
-const resolveContainerRef = (ref, document)=>{
-    var _ref;
-    if (!(0, _canUseDOMDefault.default)) return null;
-    if (ref == null) return (document || (0, _ownerDocumentDefault.default)()).body;
-    if (typeof ref === "function") ref = ref();
-    if (ref && "current" in ref) ref = ref.current;
-    if ((_ref = ref) != null && _ref.nodeType) return ref || null;
-    return null;
-};
-function useWaitForDOMRef(ref, onResolved) {
-    const window = (0, _useWindowDefault.default)();
-    const [resolvedRef, setRef] = (0, _react.useState)(()=>resolveContainerRef(ref, window == null ? void 0 : window.document));
-    if (!resolvedRef) {
-        const earlyRef = resolveContainerRef(ref);
-        if (earlyRef) setRef(earlyRef);
-    }
-    (0, _react.useEffect)(()=>{
-        if (onResolved && resolvedRef) onResolved(resolvedRef);
-    }, [
-        onResolved,
-        resolvedRef
-    ]);
-    (0, _react.useEffect)(()=>{
-        const nextRef = resolveContainerRef(ref);
-        if (nextRef !== resolvedRef) setRef(nextRef);
-    }, [
-        ref,
-        resolvedRef
-    ]);
-    return resolvedRef;
-}
-exports.default = useWaitForDOMRef;
-
-},{"dom-helpers/ownerDocument":"2WpOk","dom-helpers/canUseDOM":"9AwUB","react":"21dqq","./useWindow":"4AsJ2","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4AsJ2":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "WindowProvider", ()=>WindowProvider);
-var _react = require("react");
-var _canUseDOM = require("dom-helpers/canUseDOM");
-var _canUseDOMDefault = parcelHelpers.interopDefault(_canUseDOM);
-const Context = /*#__PURE__*/ (0, _react.createContext)((0, _canUseDOMDefault.default) ? window : undefined);
-const WindowProvider = Context.Provider;
-function useWindow() {
-    return (0, _react.useContext)(Context);
-}
-exports.default = useWindow;
-
-},{"react":"21dqq","dom-helpers/canUseDOM":"9AwUB","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fX7Bo":[function(require,module,exports) {
+},{"classnames":"jocGM","@restart/hooks/useEventCallback":"7ONdq","react":"21dqq","@restart/ui/Modal":"crj1M","./Fade":"aH18S","./OffcanvasBody":"fX7Bo","./OffcanvasToggling":"eGvzt","./ModalContext":"2U4Zk","./NavbarContext":"dpn1g","./OffcanvasHeader":"a6xAh","./OffcanvasTitle":"77qdX","./ThemeProvider":"dVixI","./BootstrapModalManager":"lr1Yp","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fX7Bo":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _createWithBsPrefix = require("./createWithBsPrefix");
@@ -39161,17 +39678,7 @@ OffcanvasToggling.defaultProps = defaultProps;
 OffcanvasToggling.displayName = "OffcanvasToggling";
 exports.default = OffcanvasToggling;
 
-},{"classnames":"jocGM","react":"21dqq","react-transition-group/Transition":"cKsrS","./transitionEndListener":"68oh7","./TransitionWrapper":"jKUqZ","./ThemeProvider":"dVixI","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2U4Zk":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _react = require("react");
-const ModalContext = /*#__PURE__*/ _react.createContext({
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    onHide () {}
-});
-exports.default = ModalContext;
-
-},{"react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"a6xAh":[function(require,module,exports) {
+},{"classnames":"jocGM","react":"21dqq","react-transition-group/Transition":"cKsrS","./transitionEndListener":"68oh7","./TransitionWrapper":"jKUqZ","./ThemeProvider":"dVixI","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"a6xAh":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _classnames = require("classnames");
@@ -39197,44 +39704,7 @@ OffcanvasHeader.displayName = "OffcanvasHeader";
 OffcanvasHeader.defaultProps = defaultProps;
 exports.default = OffcanvasHeader;
 
-},{"classnames":"jocGM","react":"21dqq","./ThemeProvider":"dVixI","./AbstractModalHeader":"hPF8S","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hPF8S":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _react = require("react");
-var _useEventCallback = require("@restart/hooks/useEventCallback");
-var _useEventCallbackDefault = parcelHelpers.interopDefault(_useEventCallback);
-var _closeButton = require("./CloseButton");
-var _closeButtonDefault = parcelHelpers.interopDefault(_closeButton);
-var _modalContext = require("./ModalContext");
-var _modalContextDefault = parcelHelpers.interopDefault(_modalContext);
-var _jsxRuntime = require("react/jsx-runtime");
-const defaultProps = {
-    closeLabel: "Close",
-    closeButton: false
-};
-const AbstractModalHeader = /*#__PURE__*/ _react.forwardRef(({ closeLabel , closeVariant , closeButton , onHide , children , ...props }, ref)=>{
-    const context = (0, _react.useContext)((0, _modalContextDefault.default));
-    const handleClick = (0, _useEventCallbackDefault.default)(()=>{
-        context == null || context.onHide();
-        onHide == null || onHide();
-    });
-    return /*#__PURE__*/ (0, _jsxRuntime.jsxs)("div", {
-        ref: ref,
-        ...props,
-        children: [
-            children,
-            closeButton && /*#__PURE__*/ (0, _jsxRuntime.jsx)((0, _closeButtonDefault.default), {
-                "aria-label": closeLabel,
-                variant: closeVariant,
-                onClick: handleClick
-            })
-        ]
-    });
-});
-AbstractModalHeader.defaultProps = defaultProps;
-exports.default = AbstractModalHeader;
-
-},{"react":"21dqq","@restart/hooks/useEventCallback":"7ONdq","./CloseButton":"1wmVl","./ModalContext":"2U4Zk","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"77qdX":[function(require,module,exports) {
+},{"classnames":"jocGM","react":"21dqq","./ThemeProvider":"dVixI","./AbstractModalHeader":"hPF8S","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"77qdX":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _createWithBsPrefix = require("./createWithBsPrefix");
@@ -39246,109 +39716,7 @@ exports.default = (0, _createWithBsPrefixDefault.default)("offcanvas-title", {
     Component: DivStyledAsH5
 });
 
-},{"./createWithBsPrefix":"itt7e","./divWithClassName":"eDg7t","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lr1Yp":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "getSharedManager", ()=>getSharedManager);
-var _addClass = require("dom-helpers/addClass");
-var _addClassDefault = parcelHelpers.interopDefault(_addClass);
-var _css = require("dom-helpers/css");
-var _cssDefault = parcelHelpers.interopDefault(_css);
-var _querySelectorAll = require("dom-helpers/querySelectorAll");
-var _querySelectorAllDefault = parcelHelpers.interopDefault(_querySelectorAll);
-var _removeClass = require("dom-helpers/removeClass");
-var _removeClassDefault = parcelHelpers.interopDefault(_removeClass);
-var _modalManager = require("@restart/ui/ModalManager");
-var _modalManagerDefault = parcelHelpers.interopDefault(_modalManager);
-const Selector = {
-    FIXED_CONTENT: ".fixed-top, .fixed-bottom, .is-fixed, .sticky-top",
-    STICKY_CONTENT: ".sticky-top",
-    NAVBAR_TOGGLER: ".navbar-toggler"
-};
-class BootstrapModalManager extends (0, _modalManagerDefault.default) {
-    adjustAndStore(prop, element, adjust) {
-        const actual = element.style[prop]; // TODO: DOMStringMap and CSSStyleDeclaration aren't strictly compatible
-        // @ts-ignore
-        element.dataset[prop] = actual;
-        (0, _cssDefault.default)(element, {
-            [prop]: `${parseFloat((0, _cssDefault.default)(element, prop)) + adjust}px`
-        });
-    }
-    restore(prop, element) {
-        const value = element.dataset[prop];
-        if (value !== undefined) {
-            delete element.dataset[prop];
-            (0, _cssDefault.default)(element, {
-                [prop]: value
-            });
-        }
-    }
-    setContainerStyle(containerState) {
-        super.setContainerStyle(containerState);
-        const container = this.getElement();
-        (0, _addClassDefault.default)(container, "modal-open");
-        if (!containerState.scrollBarWidth) return;
-        const paddingProp = this.isRTL ? "paddingLeft" : "paddingRight";
-        const marginProp = this.isRTL ? "marginLeft" : "marginRight";
-        (0, _querySelectorAllDefault.default)(container, Selector.FIXED_CONTENT).forEach((el)=>this.adjustAndStore(paddingProp, el, containerState.scrollBarWidth));
-        (0, _querySelectorAllDefault.default)(container, Selector.STICKY_CONTENT).forEach((el)=>this.adjustAndStore(marginProp, el, -containerState.scrollBarWidth));
-        (0, _querySelectorAllDefault.default)(container, Selector.NAVBAR_TOGGLER).forEach((el)=>this.adjustAndStore(marginProp, el, containerState.scrollBarWidth));
-    }
-    removeContainerStyle(containerState) {
-        super.removeContainerStyle(containerState);
-        const container = this.getElement();
-        (0, _removeClassDefault.default)(container, "modal-open");
-        const paddingProp = this.isRTL ? "paddingLeft" : "paddingRight";
-        const marginProp = this.isRTL ? "marginLeft" : "marginRight";
-        (0, _querySelectorAllDefault.default)(container, Selector.FIXED_CONTENT).forEach((el)=>this.restore(paddingProp, el));
-        (0, _querySelectorAllDefault.default)(container, Selector.STICKY_CONTENT).forEach((el)=>this.restore(marginProp, el));
-        (0, _querySelectorAllDefault.default)(container, Selector.NAVBAR_TOGGLER).forEach((el)=>this.restore(marginProp, el));
-    }
-}
-let sharedManager;
-function getSharedManager(options) {
-    if (!sharedManager) sharedManager = new BootstrapModalManager(options);
-    return sharedManager;
-}
-exports.default = BootstrapModalManager;
-
-},{"dom-helpers/addClass":"7dIIz","dom-helpers/css":"klmhr","dom-helpers/querySelectorAll":"g5Sx6","dom-helpers/removeClass":"66hgg","@restart/ui/ModalManager":"5alMm","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7dIIz":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _hasClass = require("./hasClass");
-var _hasClassDefault = parcelHelpers.interopDefault(_hasClass);
-function addClass(element, className) {
-    if (element.classList) element.classList.add(className);
-    else if (!(0, _hasClassDefault.default)(element, className)) {
-        if (typeof element.className === "string") element.className = element.className + " " + className;
-        else element.setAttribute("class", (element.className && element.className.baseVal || "") + " " + className);
-    }
-}
-exports.default = addClass;
-
-},{"./hasClass":"6sJz4","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6sJz4":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-function hasClass(element, className) {
-    if (element.classList) return !!className && element.classList.contains(className);
-    return (" " + (element.className.baseVal || element.className) + " ").indexOf(" " + className + " ") !== -1;
-}
-exports.default = hasClass;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"66hgg":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-function replaceClassName(origClass, classToRemove) {
-    return origClass.replace(new RegExp("(^|\\s)" + classToRemove + "(?:\\s|$)", "g"), "$1").replace(/\s+/g, " ").replace(/^\s*|\s*$/g, "");
-}
-function removeClass(element, className) {
-    if (element.classList) element.classList.remove(className);
-    else if (typeof element.className === "string") element.className = replaceClassName(element.className, className);
-    else element.setAttribute("class", replaceClassName(element.className && element.className.baseVal || "", className));
-}
-exports.default = removeClass;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cMC39":[function(require,module,exports) {
+},{"./createWithBsPrefix":"itt7e","./divWithClassName":"eDg7t","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cMC39":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _classnames = require("classnames");
@@ -39380,7 +39748,1005 @@ as: Component = "div" , ...props }, ref)=>{
 Row.displayName = "Row";
 exports.default = Row;
 
-},{"classnames":"jocGM","react":"21dqq","./ThemeProvider":"dVixI","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9YtA0":[function(require,module,exports) {
+},{"classnames":"jocGM","react":"21dqq","./ThemeProvider":"dVixI","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kSvyQ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Bounce", ()=>Bounce);
+parcelHelpers.export(exports, "Flip", ()=>Flip);
+parcelHelpers.export(exports, "Icons", ()=>Icons);
+parcelHelpers.export(exports, "Slide", ()=>Slide);
+parcelHelpers.export(exports, "ToastContainer", ()=>ToastContainer);
+parcelHelpers.export(exports, "Zoom", ()=>Zoom);
+parcelHelpers.export(exports, "collapseToast", ()=>collapseToast);
+parcelHelpers.export(exports, "cssTransition", ()=>cssTransition);
+parcelHelpers.export(exports, "toast", ()=>toast);
+parcelHelpers.export(exports, "useToast", ()=>useToast);
+parcelHelpers.export(exports, "useToastContainer", ()=>useToastContainer);
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _clsx = require("clsx");
+var _clsxDefault = parcelHelpers.interopDefault(_clsx);
+function isNum(v) {
+    return typeof v === "number" && !isNaN(v);
+}
+function isBool(v) {
+    return typeof v === "boolean";
+}
+function isStr(v) {
+    return typeof v === "string";
+}
+function isFn(v) {
+    return typeof v === "function";
+}
+function parseClassName(v) {
+    return isStr(v) || isFn(v) ? v : null;
+}
+function isToastIdValid(toastId) {
+    return toastId != null;
+}
+function getAutoCloseDelay(toastAutoClose, containerAutoClose) {
+    return toastAutoClose === false || isNum(toastAutoClose) && toastAutoClose > 0 ? toastAutoClose : containerAutoClose;
+}
+function canBeRendered(content) {
+    return (0, _react.isValidElement)(content) || isStr(content) || isFn(content) || isNum(content);
+}
+const POSITION = {
+    TOP_LEFT: "top-left",
+    TOP_RIGHT: "top-right",
+    TOP_CENTER: "top-center",
+    BOTTOM_LEFT: "bottom-left",
+    BOTTOM_RIGHT: "bottom-right",
+    BOTTOM_CENTER: "bottom-center"
+};
+const TYPE = {
+    INFO: "info",
+    SUCCESS: "success",
+    WARNING: "warning",
+    ERROR: "error",
+    DEFAULT: "default"
+};
+/**
+ * Used to collapse toast after exit animation
+ */ function collapseToast(node, done, duration) {
+    if (duration === void 0) duration = 300;
+    const { scrollHeight , style  } = node;
+    requestAnimationFrame(()=>{
+        style.minHeight = "initial";
+        style.height = scrollHeight + "px";
+        style.transition = "all " + duration + "ms";
+        requestAnimationFrame(()=>{
+            style.height = "0";
+            style.padding = "0";
+            style.margin = "0";
+            setTimeout(done, duration);
+        });
+    });
+}
+/**
+ * Css animation that just work.
+ * You could use animate.css for instance
+ *
+ *
+ * ```
+ * cssTransition({
+ *   enter: "animate__animated animate__bounceIn",
+ *   exit: "animate__animated animate__bounceOut"
+ * })
+ * ```
+ *
+ */ function cssTransition(_ref) {
+    let { enter , exit , appendPosition =false , collapse =true , collapseDuration =300  } = _ref;
+    return function ToastTransition(_ref2) {
+        let { children , position , preventExitTransition , done , nodeRef , isIn  } = _ref2;
+        const enterClassName = appendPosition ? enter + "--" + position : enter;
+        const exitClassName = appendPosition ? exit + "--" + position : exit;
+        const animationStep = (0, _react.useRef)(0);
+        (0, _react.useLayoutEffect)(()=>{
+            const node = nodeRef.current;
+            const classToToken = enterClassName.split(" ");
+            const onEntered = (e)=>{
+                if (e.target !== nodeRef.current) return;
+                node.dispatchEvent(new Event("d"));
+                node.removeEventListener("animationend", onEntered);
+                node.removeEventListener("animationcancel", onEntered);
+                if (animationStep.current === 0 && e.type !== "animationcancel") node.classList.remove(...classToToken);
+            };
+            const onEnter = ()=>{
+                node.classList.add(...classToToken);
+                node.addEventListener("animationend", onEntered);
+                node.addEventListener("animationcancel", onEntered);
+            };
+            onEnter();
+        }, []);
+        (0, _react.useEffect)(()=>{
+            const node = nodeRef.current;
+            const onExited = ()=>{
+                node.removeEventListener("animationend", onExited);
+                collapse ? collapseToast(node, done, collapseDuration) : done();
+            };
+            const onExit = ()=>{
+                animationStep.current = 1 /* AnimationStep.Exit */ ;
+                node.className += " " + exitClassName;
+                node.addEventListener("animationend", onExited);
+            };
+            if (!isIn) preventExitTransition ? onExited() : onExit();
+        }, [
+            isIn
+        ]);
+        return (0, _reactDefault.default).createElement((0, _reactDefault.default).Fragment, null, children);
+    };
+}
+function toToastItem(toast, status) {
+    return {
+        content: toast.content,
+        containerId: toast.props.containerId,
+        id: toast.props.toastId,
+        theme: toast.props.theme,
+        type: toast.props.type,
+        data: toast.props.data || {},
+        isLoading: toast.props.isLoading,
+        icon: toast.props.icon,
+        status
+    };
+}
+const eventManager = {
+    list: new Map(),
+    emitQueue: new Map(),
+    on (event, callback) {
+        this.list.has(event) || this.list.set(event, []);
+        this.list.get(event).push(callback);
+        return this;
+    },
+    off (event, callback) {
+        if (callback) {
+            const cb = this.list.get(event).filter((cb)=>cb !== callback);
+            this.list.set(event, cb);
+            return this;
+        }
+        this.list.delete(event);
+        return this;
+    },
+    cancelEmit (event) {
+        const timers = this.emitQueue.get(event);
+        if (timers) {
+            timers.forEach(clearTimeout);
+            this.emitQueue.delete(event);
+        }
+        return this;
+    },
+    /**
+   * Enqueue the event at the end of the call stack
+   * Doing so let the user call toast as follow:
+   * toast('1')
+   * toast('2')
+   * toast('3')
+   * Without setTimemout the code above will not work
+   */ emit (event) {
+        this.list.has(event) && this.list.get(event).forEach((callback)=>{
+            const timer = setTimeout(()=>{
+                // @ts-ignore
+                callback(...[].slice.call(arguments, 1));
+            }, 0);
+            this.emitQueue.has(event) || this.emitQueue.set(event, []);
+            this.emitQueue.get(event).push(timer);
+        });
+    }
+};
+const Svg = (_ref)=>{
+    let { theme , type , ...rest } = _ref;
+    return (0, _reactDefault.default).createElement("svg", {
+        viewBox: "0 0 24 24",
+        width: "100%",
+        height: "100%",
+        fill: theme === "colored" ? "currentColor" : "var(--toastify-icon-color-" + type + ")",
+        ...rest
+    });
+};
+function Warning(props) {
+    return (0, _reactDefault.default).createElement(Svg, {
+        ...props
+    }, (0, _reactDefault.default).createElement("path", {
+        d: "M23.32 17.191L15.438 2.184C14.728.833 13.416 0 11.996 0c-1.42 0-2.733.833-3.443 2.184L.533 17.448a4.744 4.744 0 000 4.368C1.243 23.167 2.555 24 3.975 24h16.05C22.22 24 24 22.044 24 19.632c0-.904-.251-1.746-.68-2.44zm-9.622 1.46c0 1.033-.724 1.823-1.698 1.823s-1.698-.79-1.698-1.822v-.043c0-1.028.724-1.822 1.698-1.822s1.698.79 1.698 1.822v.043zm.039-12.285l-.84 8.06c-.057.581-.408.943-.897.943-.49 0-.84-.367-.896-.942l-.84-8.065c-.057-.624.25-1.095.779-1.095h1.91c.528.005.84.476.784 1.1z"
+    }));
+}
+function Info(props) {
+    return (0, _reactDefault.default).createElement(Svg, {
+        ...props
+    }, (0, _reactDefault.default).createElement("path", {
+        d: "M12 0a12 12 0 1012 12A12.013 12.013 0 0012 0zm.25 5a1.5 1.5 0 11-1.5 1.5 1.5 1.5 0 011.5-1.5zm2.25 13.5h-4a1 1 0 010-2h.75a.25.25 0 00.25-.25v-4.5a.25.25 0 00-.25-.25h-.75a1 1 0 010-2h1a2 2 0 012 2v4.75a.25.25 0 00.25.25h.75a1 1 0 110 2z"
+    }));
+}
+function Success(props) {
+    return (0, _reactDefault.default).createElement(Svg, {
+        ...props
+    }, (0, _reactDefault.default).createElement("path", {
+        d: "M12 0a12 12 0 1012 12A12.014 12.014 0 0012 0zm6.927 8.2l-6.845 9.289a1.011 1.011 0 01-1.43.188l-4.888-3.908a1 1 0 111.25-1.562l4.076 3.261 6.227-8.451a1 1 0 111.61 1.183z"
+    }));
+}
+function Error(props) {
+    return (0, _reactDefault.default).createElement(Svg, {
+        ...props
+    }, (0, _reactDefault.default).createElement("path", {
+        d: "M11.983 0a12.206 12.206 0 00-8.51 3.653A11.8 11.8 0 000 12.207 11.779 11.779 0 0011.8 24h.214A12.111 12.111 0 0024 11.791 11.766 11.766 0 0011.983 0zM10.5 16.542a1.476 1.476 0 011.449-1.53h.027a1.527 1.527 0 011.523 1.47 1.475 1.475 0 01-1.449 1.53h-.027a1.529 1.529 0 01-1.523-1.47zM11 12.5v-6a1 1 0 012 0v6a1 1 0 11-2 0z"
+    }));
+}
+function Spinner() {
+    return (0, _reactDefault.default).createElement("div", {
+        className: "Toastify__spinner"
+    });
+}
+const Icons = {
+    info: Info,
+    warning: Warning,
+    success: Success,
+    error: Error,
+    spinner: Spinner
+};
+const maybeIcon = (type)=>type in Icons;
+function getIcon(_ref2) {
+    let { theme , type , isLoading , icon  } = _ref2;
+    let Icon = null;
+    const iconProps = {
+        theme,
+        type
+    };
+    if (icon === false) ;
+    else if (isFn(icon)) Icon = icon(iconProps);
+    else if ((0, _react.isValidElement)(icon)) Icon = (0, _react.cloneElement)(icon, iconProps);
+    else if (isStr(icon) || isNum(icon)) Icon = icon;
+    else if (isLoading) Icon = Icons.spinner();
+    else if (maybeIcon(type)) Icon = Icons[type](iconProps);
+    return Icon;
+}
+function useToastContainer(props) {
+    const [, forceUpdate] = (0, _react.useReducer)((x)=>x + 1, 0);
+    const [toastIds, setToastIds] = (0, _react.useState)([]);
+    const containerRef = (0, _react.useRef)(null);
+    const toastToRender = (0, _react.useRef)(new Map()).current;
+    const isToastActive = (id)=>toastIds.indexOf(id) !== -1;
+    const instance = (0, _react.useRef)({
+        toastKey: 1,
+        displayedToast: 0,
+        count: 0,
+        queue: [],
+        props,
+        containerId: null,
+        isToastActive,
+        getToast: (id)=>toastToRender.get(id)
+    }).current;
+    (0, _react.useEffect)(()=>{
+        instance.containerId = props.containerId;
+        eventManager.cancelEmit(3).on(0, buildToast).on(1, (toastId)=>containerRef.current && removeToast(toastId)).on(5, clearWaitingQueue).emit(2, instance);
+        return ()=>{
+            toastToRender.clear();
+            eventManager.emit(3, instance);
+        };
+    }, []);
+    (0, _react.useEffect)(()=>{
+        instance.props = props;
+        instance.isToastActive = isToastActive;
+        instance.displayedToast = toastIds.length;
+    });
+    function clearWaitingQueue(_ref) {
+        let { containerId  } = _ref;
+        const { limit  } = instance.props;
+        if (limit && (!containerId || instance.containerId === containerId)) {
+            instance.count -= instance.queue.length;
+            instance.queue = [];
+        }
+    }
+    function removeToast(toastId) {
+        setToastIds((state)=>isToastIdValid(toastId) ? state.filter((id)=>id !== toastId) : []);
+    }
+    function dequeueToast() {
+        const { toastContent , toastProps , staleId  } = instance.queue.shift();
+        appendToast(toastContent, toastProps, staleId);
+    }
+    /**
+   * check if a container is attached to the dom
+   * check for multi-container, build only if associated
+   * check for duplicate toastId if no update
+   */ function isNotValid(options) {
+        return !containerRef.current || instance.props.enableMultiContainer && options.containerId !== instance.props.containerId || toastToRender.has(options.toastId) && options.updateId == null;
+    } // this function and all the function called inside needs to rely on refs
+    function buildToast(content, _ref2) {
+        let { delay , staleId , ...options } = _ref2;
+        if (!canBeRendered(content) || isNotValid(options)) return;
+        const { toastId , updateId , data  } = options;
+        const { props  } = instance;
+        const closeToast = ()=>removeToast(toastId);
+        const isNotAnUpdate = updateId == null;
+        if (isNotAnUpdate) instance.count++;
+        const toastProps = {
+            toastId,
+            updateId,
+            data,
+            containerId: options.containerId,
+            isLoading: options.isLoading,
+            theme: options.theme || props.theme,
+            icon: options.icon != null ? options.icon : props.icon,
+            isIn: false,
+            key: options.key || instance.toastKey++,
+            type: options.type,
+            closeToast: closeToast,
+            closeButton: options.closeButton,
+            rtl: props.rtl,
+            position: options.position || props.position,
+            transition: options.transition || props.transition,
+            className: parseClassName(options.className || props.toastClassName),
+            bodyClassName: parseClassName(options.bodyClassName || props.bodyClassName),
+            style: options.style || props.toastStyle,
+            bodyStyle: options.bodyStyle || props.bodyStyle,
+            onClick: options.onClick || props.onClick,
+            pauseOnHover: isBool(options.pauseOnHover) ? options.pauseOnHover : props.pauseOnHover,
+            pauseOnFocusLoss: isBool(options.pauseOnFocusLoss) ? options.pauseOnFocusLoss : props.pauseOnFocusLoss,
+            draggable: isBool(options.draggable) ? options.draggable : props.draggable,
+            draggablePercent: options.draggablePercent || props.draggablePercent,
+            draggableDirection: options.draggableDirection || props.draggableDirection,
+            closeOnClick: isBool(options.closeOnClick) ? options.closeOnClick : props.closeOnClick,
+            progressClassName: parseClassName(options.progressClassName || props.progressClassName),
+            progressStyle: options.progressStyle || props.progressStyle,
+            autoClose: options.isLoading ? false : getAutoCloseDelay(options.autoClose, props.autoClose),
+            hideProgressBar: isBool(options.hideProgressBar) ? options.hideProgressBar : props.hideProgressBar,
+            progress: options.progress,
+            role: options.role || props.role,
+            deleteToast () {
+                const removed = toToastItem(toastToRender.get(toastId), "removed");
+                toastToRender.delete(toastId);
+                eventManager.emit(4, removed);
+                const queueLen = instance.queue.length;
+                instance.count = isToastIdValid(toastId) ? instance.count - 1 : instance.count - instance.displayedToast;
+                if (instance.count < 0) instance.count = 0;
+                if (queueLen > 0) {
+                    const freeSlot = isToastIdValid(toastId) ? 1 : instance.props.limit;
+                    if (queueLen === 1 || freeSlot === 1) {
+                        instance.displayedToast++;
+                        dequeueToast();
+                    } else {
+                        const toDequeue = freeSlot > queueLen ? queueLen : freeSlot;
+                        instance.displayedToast = toDequeue;
+                        for(let i = 0; i < toDequeue; i++)dequeueToast();
+                    }
+                } else forceUpdate();
+            }
+        };
+        toastProps.iconOut = getIcon(toastProps);
+        if (isFn(options.onOpen)) toastProps.onOpen = options.onOpen;
+        if (isFn(options.onClose)) toastProps.onClose = options.onClose;
+        toastProps.closeButton = props.closeButton;
+        if (options.closeButton === false || canBeRendered(options.closeButton)) toastProps.closeButton = options.closeButton;
+        else if (options.closeButton === true) toastProps.closeButton = canBeRendered(props.closeButton) ? props.closeButton : true;
+        let toastContent = content;
+        if ((0, _react.isValidElement)(content) && !isStr(content.type)) toastContent = (0, _react.cloneElement)(content, {
+            closeToast,
+            toastProps,
+            data
+        });
+        else if (isFn(content)) toastContent = content({
+            closeToast,
+            toastProps,
+            data
+        });
+         // not handling limit + delay by design. Waiting for user feedback first
+        if (props.limit && props.limit > 0 && instance.count > props.limit && isNotAnUpdate) instance.queue.push({
+            toastContent,
+            toastProps,
+            staleId
+        });
+        else if (isNum(delay)) setTimeout(()=>{
+            appendToast(toastContent, toastProps, staleId);
+        }, delay);
+        else appendToast(toastContent, toastProps, staleId);
+    }
+    function appendToast(content, toastProps, staleId) {
+        const { toastId  } = toastProps;
+        if (staleId) toastToRender.delete(staleId);
+        const toast = {
+            content,
+            props: toastProps
+        };
+        toastToRender.set(toastId, toast);
+        setToastIds((state)=>[
+                ...state,
+                toastId
+            ].filter((id)=>id !== staleId));
+        eventManager.emit(4, toToastItem(toast, toast.props.updateId == null ? "added" : "updated"));
+    }
+    function getToastToRender(cb) {
+        const toRender = new Map();
+        const collection = Array.from(toastToRender.values());
+        if (props.newestOnTop) collection.reverse();
+        collection.forEach((toast)=>{
+            const { position  } = toast.props;
+            toRender.has(position) || toRender.set(position, []);
+            toRender.get(position).push(toast);
+        });
+        return Array.from(toRender, (p)=>cb(p[0], p[1]));
+    }
+    return {
+        getToastToRender,
+        containerRef,
+        isToastActive
+    };
+}
+function getX(e) {
+    return e.targetTouches && e.targetTouches.length >= 1 ? e.targetTouches[0].clientX : e.clientX;
+}
+function getY(e) {
+    return e.targetTouches && e.targetTouches.length >= 1 ? e.targetTouches[0].clientY : e.clientY;
+}
+function useToast(props) {
+    const [isRunning, setIsRunning] = (0, _react.useState)(false);
+    const [preventExitTransition, setPreventExitTransition] = (0, _react.useState)(false);
+    const toastRef = (0, _react.useRef)(null);
+    const drag = (0, _react.useRef)({
+        start: 0,
+        x: 0,
+        y: 0,
+        delta: 0,
+        removalDistance: 0,
+        canCloseOnClick: true,
+        canDrag: false,
+        boundingRect: null,
+        didMove: false
+    }).current;
+    const syncProps = (0, _react.useRef)(props);
+    const { autoClose , pauseOnHover , closeToast , onClick , closeOnClick  } = props;
+    (0, _react.useEffect)(()=>{
+        syncProps.current = props;
+    });
+    (0, _react.useEffect)(()=>{
+        if (toastRef.current) toastRef.current.addEventListener("d", playToast, {
+            once: true
+        });
+        if (isFn(props.onOpen)) props.onOpen((0, _react.isValidElement)(props.children) && props.children.props);
+        return ()=>{
+            const props = syncProps.current;
+            if (isFn(props.onClose)) props.onClose((0, _react.isValidElement)(props.children) && props.children.props);
+        };
+    }, []);
+    (0, _react.useEffect)(()=>{
+        props.pauseOnFocusLoss && bindFocusEvents();
+        return ()=>{
+            props.pauseOnFocusLoss && unbindFocusEvents();
+        };
+    }, [
+        props.pauseOnFocusLoss
+    ]);
+    function onDragStart(e) {
+        if (props.draggable) {
+            bindDragEvents();
+            const toast = toastRef.current;
+            drag.canCloseOnClick = true;
+            drag.canDrag = true;
+            drag.boundingRect = toast.getBoundingClientRect();
+            toast.style.transition = "";
+            drag.x = getX(e.nativeEvent);
+            drag.y = getY(e.nativeEvent);
+            if (props.draggableDirection === "x") {
+                drag.start = drag.x;
+                drag.removalDistance = toast.offsetWidth * (props.draggablePercent / 100);
+            } else {
+                drag.start = drag.y;
+                drag.removalDistance = toast.offsetHeight * (props.draggablePercent === 80 ? props.draggablePercent * 1.5 : props.draggablePercent / 100);
+            }
+        }
+    }
+    function onDragTransitionEnd() {
+        if (drag.boundingRect) {
+            const { top , bottom , left , right  } = drag.boundingRect;
+            if (props.pauseOnHover && drag.x >= left && drag.x <= right && drag.y >= top && drag.y <= bottom) pauseToast();
+            else playToast();
+        }
+    }
+    function playToast() {
+        setIsRunning(true);
+    }
+    function pauseToast() {
+        setIsRunning(false);
+    }
+    function bindFocusEvents() {
+        if (!document.hasFocus()) pauseToast();
+        window.addEventListener("focus", playToast);
+        window.addEventListener("blur", pauseToast);
+    }
+    function unbindFocusEvents() {
+        window.removeEventListener("focus", playToast);
+        window.removeEventListener("blur", pauseToast);
+    }
+    function bindDragEvents() {
+        drag.didMove = false;
+        document.addEventListener("mousemove", onDragMove);
+        document.addEventListener("mouseup", onDragEnd);
+        document.addEventListener("touchmove", onDragMove);
+        document.addEventListener("touchend", onDragEnd);
+    }
+    function unbindDragEvents() {
+        document.removeEventListener("mousemove", onDragMove);
+        document.removeEventListener("mouseup", onDragEnd);
+        document.removeEventListener("touchmove", onDragMove);
+        document.removeEventListener("touchend", onDragEnd);
+    }
+    function onDragMove(e) {
+        const toast = toastRef.current;
+        if (drag.canDrag && toast) {
+            drag.didMove = true;
+            if (isRunning) pauseToast();
+            drag.x = getX(e);
+            drag.y = getY(e);
+            if (props.draggableDirection === "x") drag.delta = drag.x - drag.start;
+            else drag.delta = drag.y - drag.start;
+             // prevent false positif during a toast click
+            if (drag.start !== drag.x) drag.canCloseOnClick = false;
+            toast.style.transform = "translate" + props.draggableDirection + "(" + drag.delta + "px)";
+            toast.style.opacity = "" + (1 - Math.abs(drag.delta / drag.removalDistance));
+        }
+    }
+    function onDragEnd() {
+        unbindDragEvents();
+        const toast = toastRef.current;
+        if (drag.canDrag && drag.didMove && toast) {
+            drag.canDrag = false;
+            if (Math.abs(drag.delta) > drag.removalDistance) {
+                setPreventExitTransition(true);
+                props.closeToast();
+                return;
+            }
+            toast.style.transition = "transform 0.2s, opacity 0.2s";
+            toast.style.transform = "translate" + props.draggableDirection + "(0)";
+            toast.style.opacity = "1";
+        }
+    }
+    const eventHandlers = {
+        onMouseDown: onDragStart,
+        onTouchStart: onDragStart,
+        onMouseUp: onDragTransitionEnd,
+        onTouchEnd: onDragTransitionEnd
+    };
+    if (autoClose && pauseOnHover) {
+        eventHandlers.onMouseEnter = pauseToast;
+        eventHandlers.onMouseLeave = playToast;
+    } // prevent toast from closing when user drags the toast
+    if (closeOnClick) eventHandlers.onClick = (e)=>{
+        onClick && onClick(e);
+        drag.canCloseOnClick && closeToast();
+    };
+    return {
+        playToast,
+        pauseToast,
+        isRunning,
+        preventExitTransition,
+        toastRef,
+        eventHandlers
+    };
+}
+function CloseButton(_ref) {
+    let { closeToast , theme , ariaLabel ="close"  } = _ref;
+    return (0, _reactDefault.default).createElement("button", {
+        className: "Toastify__close-button Toastify__close-button--" + theme,
+        type: "button",
+        onClick: (e)=>{
+            e.stopPropagation();
+            closeToast(e);
+        },
+        "aria-label": ariaLabel
+    }, (0, _reactDefault.default).createElement("svg", {
+        "aria-hidden": "true",
+        viewBox: "0 0 14 16"
+    }, (0, _reactDefault.default).createElement("path", {
+        fillRule: "evenodd",
+        d: "M7.71 8.23l3.75 3.75-1.48 1.48-3.75-3.75-3.75 3.75L1 11.98l3.75-3.75L1 4.48 2.48 3l3.75 3.75L9.98 3l1.48 1.48-3.75 3.75z"
+    })));
+}
+function ProgressBar(_ref) {
+    let { delay , isRunning , closeToast , type , hide , className , style: userStyle , controlledProgress , progress , rtl , isIn , theme  } = _ref;
+    const style = {
+        ...userStyle,
+        animationDuration: delay + "ms",
+        animationPlayState: isRunning ? "running" : "paused",
+        opacity: hide ? 0 : 1
+    };
+    if (controlledProgress) style.transform = "scaleX(" + progress + ")";
+    const defaultClassName = (0, _clsxDefault.default)("Toastify__progress-bar", controlledProgress ? "Toastify__progress-bar--controlled" : "Toastify__progress-bar--animated", "Toastify__progress-bar-theme--" + theme, "Toastify__progress-bar--" + type, {
+        ["Toastify__progress-bar--rtl"]: rtl
+    });
+    const classNames = isFn(className) ? className({
+        rtl,
+        type,
+        defaultClassName
+    }) : (0, _clsxDefault.default)(defaultClassName, className); // 🧐 controlledProgress is derived from progress
+    // so if controlledProgress is set
+    // it means that this is also the case for progress
+    const animationEvent = {
+        [controlledProgress && progress >= 1 ? "onTransitionEnd" : "onAnimationEnd"]: controlledProgress && progress < 1 ? null : ()=>{
+            isIn && closeToast();
+        }
+    }; // TODO: add aria-valuenow, aria-valuemax, aria-valuemin
+    return (0, _reactDefault.default).createElement("div", {
+        role: "progressbar",
+        "aria-hidden": hide ? "true" : "false",
+        "aria-label": "notification timer",
+        className: classNames,
+        style: style,
+        ...animationEvent
+    });
+}
+ProgressBar.defaultProps = {
+    type: TYPE.DEFAULT,
+    hide: false
+};
+const Toast = (props)=>{
+    const { isRunning , preventExitTransition , toastRef , eventHandlers  } = useToast(props);
+    const { closeButton , children , autoClose , onClick , type , hideProgressBar , closeToast , transition: Transition , position , className , style , bodyClassName , bodyStyle , progressClassName , progressStyle , updateId , role , progress , rtl , toastId , deleteToast , isIn , isLoading , iconOut , theme  } = props;
+    const defaultClassName = (0, _clsxDefault.default)("Toastify__toast", "Toastify__toast-theme--" + theme, "Toastify__toast--" + type, {
+        ["Toastify__toast--rtl"]: rtl
+    });
+    const cssClasses = isFn(className) ? className({
+        rtl,
+        position,
+        type,
+        defaultClassName
+    }) : (0, _clsxDefault.default)(defaultClassName, className);
+    const isProgressControlled = !!progress;
+    const closeButtonProps = {
+        closeToast,
+        type,
+        theme
+    };
+    let Close = null;
+    if (closeButton === false) ;
+    else if (isFn(closeButton)) Close = closeButton(closeButtonProps);
+    else if ((0, _reactDefault.default).isValidElement(closeButton)) Close = (0, _reactDefault.default).cloneElement(closeButton, closeButtonProps);
+    else Close = CloseButton(closeButtonProps);
+    return (0, _reactDefault.default).createElement(Transition, {
+        isIn: isIn,
+        done: deleteToast,
+        position: position,
+        preventExitTransition: preventExitTransition,
+        nodeRef: toastRef
+    }, (0, _reactDefault.default).createElement("div", {
+        id: toastId,
+        onClick: onClick,
+        className: cssClasses,
+        ...eventHandlers,
+        style: style,
+        ref: toastRef
+    }, (0, _reactDefault.default).createElement("div", {
+        ...isIn && {
+            role: role
+        },
+        className: isFn(bodyClassName) ? bodyClassName({
+            type
+        }) : (0, _clsxDefault.default)("Toastify__toast-body", bodyClassName),
+        style: bodyStyle
+    }, iconOut != null && (0, _reactDefault.default).createElement("div", {
+        className: (0, _clsxDefault.default)("Toastify__toast-icon", {
+            ["Toastify--animate-icon Toastify__zoom-enter"]: !isLoading
+        })
+    }, iconOut), (0, _reactDefault.default).createElement("div", null, children)), Close, (autoClose || isProgressControlled) && (0, _reactDefault.default).createElement(ProgressBar, {
+        ...updateId && !isProgressControlled ? {
+            key: "pb-" + updateId
+        } : {},
+        rtl: rtl,
+        theme: theme,
+        delay: autoClose,
+        isRunning: isRunning,
+        isIn: isIn,
+        closeToast: closeToast,
+        hide: hideProgressBar,
+        type: type,
+        style: progressStyle,
+        className: progressClassName,
+        controlledProgress: isProgressControlled,
+        progress: progress
+    })));
+};
+const Bounce = cssTransition({
+    enter: "Toastify--animate Toastify__bounce-enter",
+    exit: "Toastify--animate Toastify__bounce-exit",
+    appendPosition: true
+});
+const Slide = cssTransition({
+    enter: "Toastify--animate Toastify__slide-enter",
+    exit: "Toastify--animate Toastify__slide-exit",
+    appendPosition: true
+});
+const Zoom = cssTransition({
+    enter: "Toastify--animate Toastify__zoom-enter",
+    exit: "Toastify--animate Toastify__zoom-exit"
+});
+const Flip = cssTransition({
+    enter: "Toastify--animate Toastify__flip-enter",
+    exit: "Toastify--animate Toastify__flip-exit"
+});
+// https://github.com/yannickcr/eslint-plugin-react/issues/3140
+const ToastContainer = (0, _react.forwardRef)((props, ref)=>{
+    const { getToastToRender , containerRef , isToastActive  } = useToastContainer(props);
+    const { className , style , rtl , containerId  } = props;
+    function getClassName(position) {
+        const defaultClassName = (0, _clsxDefault.default)("Toastify__toast-container", "Toastify__toast-container--" + position, {
+            ["Toastify__toast-container--rtl"]: rtl
+        });
+        return isFn(className) ? className({
+            position,
+            rtl,
+            defaultClassName
+        }) : (0, _clsxDefault.default)(defaultClassName, parseClassName(className));
+    }
+    (0, _react.useEffect)(()=>{
+        if (ref) ref.current = containerRef.current;
+    }, []);
+    return (0, _reactDefault.default).createElement("div", {
+        ref: containerRef,
+        className: "Toastify",
+        id: containerId
+    }, getToastToRender((position, toastList)=>{
+        const containerStyle = !toastList.length ? {
+            ...style,
+            pointerEvents: "none"
+        } : {
+            ...style
+        };
+        return (0, _reactDefault.default).createElement("div", {
+            className: getClassName(position),
+            style: containerStyle,
+            key: "container-" + position
+        }, toastList.map((_ref, i)=>{
+            let { content , props: toastProps  } = _ref;
+            return (0, _reactDefault.default).createElement(Toast, {
+                ...toastProps,
+                isIn: isToastActive(toastProps.toastId),
+                style: {
+                    ...toastProps.style,
+                    "--nth": i + 1,
+                    "--len": toastList.length
+                },
+                key: "toast-" + toastProps.key
+            }, content);
+        }));
+    }));
+});
+ToastContainer.displayName = "ToastContainer";
+ToastContainer.defaultProps = {
+    position: POSITION.TOP_RIGHT,
+    transition: Bounce,
+    rtl: false,
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeButton: CloseButton,
+    pauseOnHover: true,
+    pauseOnFocusLoss: true,
+    closeOnClick: true,
+    newestOnTop: false,
+    draggable: true,
+    draggablePercent: 80,
+    draggableDirection: "x",
+    role: "alert",
+    theme: "light"
+};
+let containers = new Map();
+let latestInstance;
+let queue = [];
+/**
+ * Get the toast by id, given it's in the DOM, otherwise returns null
+ */ function getToast(toastId, _ref) {
+    let { containerId  } = _ref;
+    const container = containers.get(containerId || latestInstance);
+    if (!container) return null;
+    return container.getToast(toastId);
+}
+/**
+ * Generate a random toastId
+ */ function generateToastId() {
+    return Math.random().toString(36).substring(2, 9);
+}
+/**
+ * Generate a toastId or use the one provided
+ */ function getToastId(options) {
+    if (options && (isStr(options.toastId) || isNum(options.toastId))) return options.toastId;
+    return generateToastId();
+}
+/**
+ * If the container is not mounted, the toast is enqueued and
+ * the container lazy mounted
+ */ function dispatchToast(content, options) {
+    if (containers.size > 0) eventManager.emit(0, content, options);
+    else queue.push({
+        content,
+        options
+    });
+    return options.toastId;
+}
+/**
+ * Merge provided options with the defaults settings and generate the toastId
+ */ function mergeOptions(type, options) {
+    return {
+        ...options,
+        type: options && options.type || type,
+        toastId: getToastId(options)
+    };
+}
+function createToastByType(type) {
+    return (content, options)=>dispatchToast(content, mergeOptions(type, options));
+}
+function toast(content, options) {
+    return dispatchToast(content, mergeOptions(TYPE.DEFAULT, options));
+}
+toast.loading = (content, options)=>dispatchToast(content, mergeOptions(TYPE.DEFAULT, {
+        isLoading: true,
+        autoClose: false,
+        closeOnClick: false,
+        closeButton: false,
+        draggable: false,
+        ...options
+    }));
+function handlePromise(promise, _ref2, options) {
+    let { pending , error , success  } = _ref2;
+    let id;
+    if (pending) id = isStr(pending) ? toast.loading(pending, options) : toast.loading(pending.render, {
+        ...options,
+        ...pending
+    });
+    const resetParams = {
+        isLoading: null,
+        autoClose: null,
+        closeOnClick: null,
+        closeButton: null,
+        draggable: null,
+        delay: 100
+    };
+    const resolver = (type, input, result)=>{
+        // Remove the toast if the input has not been provided. This prevents the toast from hanging
+        // in the pending state if a success/error toast has not been provided.
+        if (input == null) {
+            toast.dismiss(id);
+            return;
+        }
+        const baseParams = {
+            type,
+            ...resetParams,
+            ...options,
+            data: result
+        };
+        const params = isStr(input) ? {
+            render: input
+        } : input; // if the id is set we know that it's an update
+        if (id) toast.update(id, {
+            ...baseParams,
+            ...params
+        });
+        else // using toast.promise without loading
+        toast(params.render, {
+            ...baseParams,
+            ...params
+        });
+        return result;
+    };
+    const p = isFn(promise) ? promise() : promise; //call the resolvers only when needed
+    p.then((result)=>resolver("success", success, result)).catch((err)=>resolver("error", error, err));
+    return p;
+}
+toast.promise = handlePromise;
+toast.success = createToastByType(TYPE.SUCCESS);
+toast.info = createToastByType(TYPE.INFO);
+toast.error = createToastByType(TYPE.ERROR);
+toast.warning = createToastByType(TYPE.WARNING);
+toast.warn = toast.warning;
+toast.dark = (content, options)=>dispatchToast(content, mergeOptions(TYPE.DEFAULT, {
+        theme: "dark",
+        ...options
+    }));
+/**
+ * Remove toast programmaticaly
+ */ toast.dismiss = (id)=>{
+    if (containers.size > 0) eventManager.emit(1, id);
+    else queue = queue.filter((t)=>isToastIdValid(id) && t.options.toastId !== id);
+};
+/**
+ * Clear waiting queue when limit is used
+ */ toast.clearWaitingQueue = function(params) {
+    if (params === void 0) params = {};
+    return eventManager.emit(5, params);
+};
+/**
+ * return true if one container is displaying the toast
+ */ toast.isActive = (id)=>{
+    let isToastActive = false;
+    containers.forEach((container)=>{
+        if (container.isToastActive && container.isToastActive(id)) isToastActive = true;
+    });
+    return isToastActive;
+};
+toast.update = function(toastId, options) {
+    if (options === void 0) options = {};
+    // if you call toast and toast.update directly nothing will be displayed
+    // this is why I defered the update
+    setTimeout(()=>{
+        const toast = getToast(toastId, options);
+        if (toast) {
+            const { props: oldOptions , content: oldContent  } = toast;
+            const nextOptions = {
+                ...oldOptions,
+                ...options,
+                toastId: options.toastId || toastId,
+                updateId: generateToastId()
+            };
+            if (nextOptions.toastId !== toastId) nextOptions.staleId = toastId;
+            const content = nextOptions.render || oldContent;
+            delete nextOptions.render;
+            dispatchToast(content, nextOptions);
+        }
+    }, 0);
+};
+/**
+ * Used for controlled progress bar.
+ */ toast.done = (id)=>{
+    toast.update(id, {
+        progress: 1
+    });
+};
+/**
+ * Subscribe to change when a toast is added, removed and updated
+ *
+ * Usage:
+ * ```
+ * const unsubscribe = toast.onChange((payload) => {
+ *   switch (payload.status) {
+ *   case "added":
+ *     // new toast added
+ *     break;
+ *   case "updated":
+ *     // toast updated
+ *     break;
+ *   case "removed":
+ *     // toast has been removed
+ *     break;
+ *   }
+ * })
+ * ```
+ */ toast.onChange = (callback)=>{
+    eventManager.on(4, callback);
+    return ()=>{
+        eventManager.off(4, callback);
+    };
+};
+toast.POSITION = POSITION;
+toast.TYPE = TYPE;
+/**
+ * Wait until the ToastContainer is mounted to dispatch the toast
+ * and attach isActive method
+ */ eventManager.on(2, (containerInstance)=>{
+    latestInstance = containerInstance.containerId || containerInstance;
+    containers.set(latestInstance, containerInstance);
+    queue.forEach((item)=>{
+        eventManager.emit(0, item.content, item.options);
+    });
+    queue = [];
+}).on(3, (containerInstance)=>{
+    containers.delete(containerInstance.containerId || containerInstance);
+    if (containers.size === 0) eventManager.off(0).off(1).off(5);
+});
+
+},{"react":"21dqq","clsx":"83C22","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"83C22":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "clsx", ()=>clsx);
+function r(e) {
+    var t, f, n = "";
+    if ("string" == typeof e || "number" == typeof e) n += e;
+    else if ("object" == typeof e) {
+        if (Array.isArray(e)) for(t = 0; t < e.length; t++)e[t] && (f = r(e[t])) && (n && (n += " "), n += f);
+        else for(t in e)e[t] && (n && (n += " "), n += t);
+    }
+    return n;
+}
+function clsx() {
+    for(var e, t, f = 0, n = ""; f < arguments.length;)(e = arguments[f++]) && (t = r(e)) && (n && (n += " "), n += t);
+    return n;
+}
+exports.default = clsx;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9YtA0":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$9fee = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -39621,12 +40987,12 @@ function RegistrationView(props) {
                         }, void 0, false, {
                             fileName: "src/components/registration-view/registration-view.jsx",
                             lineNumber: 74,
-                            columnNumber: 19
+                            columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {}, void 0, false, {
                             fileName: "src/components/registration-view/registration-view.jsx",
                             lineNumber: 75,
-                            columnNumber: 19
+                            columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
                             controlId: "formUsername",
@@ -39637,7 +41003,7 @@ function RegistrationView(props) {
                                 }, void 0, false, {
                                     fileName: "src/components/registration-view/registration-view.jsx",
                                     lineNumber: 77,
-                                    columnNumber: 21
+                                    columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
                                     type: "text",
@@ -39646,20 +41012,20 @@ function RegistrationView(props) {
                                 }, void 0, false, {
                                     fileName: "src/components/registration-view/registration-view.jsx",
                                     lineNumber: 78,
-                                    columnNumber: 23
+                                    columnNumber: 17
                                 }, this),
                                 values.usernameErr && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                     children: values.usernameErr
                                 }, void 0, false, {
                                     fileName: "src/components/registration-view/registration-view.jsx",
                                     lineNumber: 79,
-                                    columnNumber: 48
+                                    columnNumber: 42
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/registration-view/registration-view.jsx",
                             lineNumber: 76,
-                            columnNumber: 19
+                            columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
                             controlId: "formPassword",
@@ -39670,7 +41036,7 @@ function RegistrationView(props) {
                                 }, void 0, false, {
                                     fileName: "src/components/registration-view/registration-view.jsx",
                                     lineNumber: 83,
-                                    columnNumber: 21
+                                    columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
                                     type: "password",
@@ -39679,20 +41045,20 @@ function RegistrationView(props) {
                                 }, void 0, false, {
                                     fileName: "src/components/registration-view/registration-view.jsx",
                                     lineNumber: 84,
-                                    columnNumber: 23
+                                    columnNumber: 17
                                 }, this),
                                 values.passwordErr && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                     children: values.passwordErr
                                 }, void 0, false, {
                                     fileName: "src/components/registration-view/registration-view.jsx",
                                     lineNumber: 85,
-                                    columnNumber: 48
+                                    columnNumber: 42
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/registration-view/registration-view.jsx",
                             lineNumber: 82,
-                            columnNumber: 19
+                            columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
                             controlId: "Email",
@@ -39703,7 +41069,7 @@ function RegistrationView(props) {
                                 }, void 0, false, {
                                     fileName: "src/components/registration-view/registration-view.jsx",
                                     lineNumber: 89,
-                                    columnNumber: 21
+                                    columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
                                     type: "email",
@@ -39712,20 +41078,20 @@ function RegistrationView(props) {
                                 }, void 0, false, {
                                     fileName: "src/components/registration-view/registration-view.jsx",
                                     lineNumber: 90,
-                                    columnNumber: 23
+                                    columnNumber: 17
                                 }, this),
                                 values.emailErr && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                     children: values.emailErr
                                 }, void 0, false, {
                                     fileName: "src/components/registration-view/registration-view.jsx",
                                     lineNumber: 91,
-                                    columnNumber: 45
+                                    columnNumber: 39
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/registration-view/registration-view.jsx",
                             lineNumber: 88,
-                            columnNumber: 19
+                            columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
                             controlId: "updateBirthday",
@@ -39736,7 +41102,7 @@ function RegistrationView(props) {
                                 }, void 0, false, {
                                     fileName: "src/components/registration-view/registration-view.jsx",
                                     lineNumber: 95,
-                                    columnNumber: 21
+                                    columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
                                     type: "date",
@@ -39745,13 +41111,13 @@ function RegistrationView(props) {
                                 }, void 0, false, {
                                     fileName: "src/components/registration-view/registration-view.jsx",
                                     lineNumber: 96,
-                                    columnNumber: 23
+                                    columnNumber: 17
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/registration-view/registration-view.jsx",
                             lineNumber: 94,
-                            columnNumber: 19
+                            columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
                             variant: "primary",
@@ -39761,18 +41127,18 @@ function RegistrationView(props) {
                         }, void 0, false, {
                             fileName: "src/components/registration-view/registration-view.jsx",
                             lineNumber: 100,
-                            columnNumber: 19
+                            columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {}, void 0, false, {
                             fileName: "src/components/registration-view/registration-view.jsx",
                             lineNumber: 103,
-                            columnNumber: 19
+                            columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/registration-view/registration-view.jsx",
                     lineNumber: 73,
-                    columnNumber: 17
+                    columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "src/components/registration-view/registration-view.jsx",
@@ -39855,10 +41221,19 @@ function Menubar() {
                         className: "ml-auto",
                         children: [
                             isAuth() && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
-                                href: `/users/${user}`
+                                className: "navbar-link",
+                                href: `/users/${user}`,
+                                children: "MyPage"
                             }, void 0, false, {
                                 fileName: "src/components/navbar/navbar.jsx",
                                 lineNumber: 30,
+                                columnNumber: 29
+                            }, this),
+                            isAuth() && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
+                                href: `/users/${user}`
+                            }, void 0, false, {
+                                fileName: "src/components/navbar/navbar.jsx",
+                                lineNumber: 35,
                                 columnNumber: 29
                             }, this),
                             isAuth() && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
@@ -39869,7 +41244,7 @@ function Menubar() {
                                 children: "Logout"
                             }, void 0, false, {
                                 fileName: "src/components/navbar/navbar.jsx",
-                                lineNumber: 33,
+                                lineNumber: 38,
                                 columnNumber: 29
                             }, this),
                             !isAuth() && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
@@ -39877,7 +41252,7 @@ function Menubar() {
                                 children: "Sign-in"
                             }, void 0, false, {
                                 fileName: "src/components/navbar/navbar.jsx",
-                                lineNumber: 36,
+                                lineNumber: 41,
                                 columnNumber: 29
                             }, this),
                             !isAuth() && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
@@ -39885,7 +41260,7 @@ function Menubar() {
                                 children: "Sign-up"
                             }, void 0, false, {
                                 fileName: "src/components/navbar/navbar.jsx",
-                                lineNumber: 39,
+                                lineNumber: 44,
                                 columnNumber: 29
                             }, this)
                         ]
@@ -40337,7 +41712,7 @@ function ProfileView({ props  }) {
                 user: user
             }, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 74,
+                lineNumber: 67,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
@@ -40348,7 +41723,7 @@ function ProfileView({ props  }) {
                 children: "Delete the profile"
             }, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 75,
+                lineNumber: 68,
                 columnNumber: 13
             }, this)
         ]
@@ -40372,7 +41747,7 @@ $RefreshReg$(_c, "ProfileView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","prop-types":"7wKI2","react-bootstrap":"3AD9A","axios":"jo6P5","./favourite-movie-view":"5fmyI","./update-view":"fs4jm","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"5fmyI":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap":"3AD9A","axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","prop-types":"7wKI2","./favourite-movie-view":"5fmyI","./update-view":"fs4jm"}],"5fmyI":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$ead1 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;

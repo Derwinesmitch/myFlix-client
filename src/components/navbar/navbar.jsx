@@ -27,6 +27,11 @@ export function Menubar() {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="ml-auto">
                         {isAuth() && (
+                            <Nav.Link className="navbar-link" href={`/users/${user}`}>
+                                MyPage
+                            </Nav.Link>
+                        )}
+                        {isAuth() && (
                             <Nav.Link href={`/users/${user}`}></Nav.Link>
                         )}
                         {isAuth() && (
