@@ -3,6 +3,13 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+
  export function LoginView(props) {
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
@@ -39,7 +46,7 @@ import axios from 'axios';
             Username: username,
             Password: password
         })
-        .then(response =>{
+        .then((response) => {
             const data = response.data;
             props.onLoggedIn(data);
         })
@@ -69,7 +76,8 @@ import axios from 'axios';
           Submit
           </Button>
       </Form>
-    )
+    );
   }
+  
   
   

@@ -1,0 +1,1 @@
+{"mappings":";;ACEA","sources":["src/components/login-view/login-view.scss","src/index.scss"],"sourcesContent":[null,"$color: steelblue;\r\n\r\n.my-flix {\r\n    color: $color;\r\n}\r\n\r\n// .app-container {\r\n//     background-color: rgb(207, 152, 49);\r\n//   }"],"names":[],"version":3,"file":"index.27d8da6b.css.map","sourceRoot":"/__parcel_source_root/"}
