@@ -13,6 +13,7 @@ function visibilityFilter(state = '', action) {
 
 
 function movies(state = [], action) {
+  console.log("set movies is called")
   switch (action.type) {
     case SET_MOVIES:
       return action.value;
@@ -21,7 +22,8 @@ function movies(state = [], action) {
   }
 }
 
-function user(state = [], action) {
+function user(state = null, action) {
+  console.log("set user is called")
   switch (action.type) {
     case SET_USER:
       return action.value || localStorage.getItem('user');

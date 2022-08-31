@@ -17,26 +17,15 @@ import { Container, Col, Row } from 'react-bootstrap';
 class MainView extends React.Component {
     constructor() {
         super();
-        this.state = {
-            user: null,
-        };
     }
 
 
     componentDidMount() {
      let accessToken = localStorage.getItem('token');
-     if (accessToken !== null) {
-        //  this.props.setUser({
-        //   user: localStorage.getItem('user'),
-        //  });
-
-        
-            this.setState({
-              user: localStorage.getItem('user')
-       });      
+     if (accessToken !== null) {  
           this.getMovies(accessToken);
-
-       }
+      }
+    this.props.setUser(localStorage.getItem('user'));
     }
   
     getMovies(token) {
@@ -51,14 +40,11 @@ class MainView extends React.Component {
       });
     }
 
-        onLoggedIn(authData)  {
-          console.log(authData);
-          this.setState({
-            user: authData.user.Username
-      });
+    onLoggedIn(authData)  {
+      console.log(authData);
       // const { setUser } = this.props;
       // setUser(authData.user.Username);
-      // this.props.setUser({ user: authData.user.Username, });
+      this.props.setUser({ user: authData.user.Username, });
       localStorage.setItem('token', authData.token);
       localStorage.setItem('user', authData.user.Username);
       this.getMovies(authData.token);
@@ -85,8 +71,8 @@ class MainView extends React.Component {
 
     render() {
 
-      let { movies } = this.props;
-      let { user } = this.props;
+      const { movies, user } = this.props;
+      console.log("User Ob", user)
     
       let localUser = localStorage.getItem('user');
         return (
@@ -147,8 +133,9 @@ class MainView extends React.Component {
                     </Col>
                   }} />
 
-                <Route path={`/users/${localUser}`}
+                <Route path={`/users/${user}`}
                 render={() => {
+                  console.log(user)
                   if (!user) return <Redirect to="/" />;
                   return (
                     <Col>
@@ -179,4 +166,4 @@ class MainView extends React.Component {
     };
     
     // #8
-    export default connect(mapStateToProps, { setMovies })(MainView);
+    export default connect(mapStateToProps, { setMovies, setUser })(MainView);

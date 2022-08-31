@@ -4,12 +4,13 @@ import axios from 'axios';
 
 import { Button, Container, Col, Row, Form } from 'react-bootstrap';
 
-export function UpdateView() {
-    // const { user } = props;
-    const [ username, setUsername ] = useState('');
-    const [ password, setPassword ] = useState('');
-    const [ email, setEmail ] = useState('');
-    const [ birthday, setBirthday ] = useState('');
+export function UpdateView(props) {
+    const { user } = props;
+    console.log("updateview", user)
+    const [ username, setUsername ] = useState(user.Username);
+    const [ password, setPassword ] = useState(user.Password);
+    const [ email, setEmail ] = useState(user.Email);
+    const [ birthday, setBirthday ] = useState(user.Birthday);
     const [ values, setValues ] = useState({
         usernameErr: '',
         passwordErr: '',

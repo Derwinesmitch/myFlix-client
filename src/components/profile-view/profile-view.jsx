@@ -6,17 +6,21 @@ import axios from 'axios';
 import { FavouriteMoviesView } from './favourite-movie-view';
 import { UpdateView } from './update-view';
 
-export function ProfileView({props}) {
+export function ProfileView(props) {
+        const username = props.user;
+        const movies = props.movies;
+        console.log("In Profile view", username, movies)
         const [ user, setUser ] = useState({}); 
         // const [ movies, setMovies ] = useState(props.movies);
         const [ updatedUser, setUpdatedUser] = useState({});
         const [ favouriteMovies, setFavouriteMovies ] = useState([]);
         const token = localStorage.getItem('token');
 
-const getUser = () => {
+useEffect(() => {
+        console.log("Im called")
         const username = localStorage.getItem('user');
 
-        axios.get(`https://movieappcf.herokuapp.com/users/${props.user}`, {
+        axios.get(`https://movieappcf.herokuapp.com/users/${username}`, {
                 headers: { Authorization: `Bearer ${token}`}
         })
         .then(response => {
@@ -25,7 +29,7 @@ const getUser = () => {
                 setFavouriteMovies(response.data.FavouriteMovies)
         })
         .catch(error => console.error(error))
-}
+}, []);
 
 
 const handleDelete = () => {
@@ -71,7 +75,6 @@ return(
 }
 
 ProfileView.PropTypes = {
-
         username: PropTypes.string.isRequired,
         password: PropTypes.string.isRequired,
       }
